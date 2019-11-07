@@ -34,7 +34,7 @@ wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
 
 
-!wp-content/uploads
+wp-content/uploads
 wp-content/index.php
 wp-content/plugins/*
 !wp-content/plugins/plugaddons

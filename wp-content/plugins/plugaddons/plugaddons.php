@@ -140,7 +140,23 @@ final class Elementor_Plugaddons_Extension {
 		// Add Plugin actions
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'init_widgets' ] );
         add_action( 'elementor/elements/categories_registered', [$this, 'register_new_category'] );
+
+        add_action('elementor/frontend/after_enqueue_scripts',[$this,'progressbar_assets']);
 	}
+    /**
+     * Add Progress Bar JS
+     *
+     * Warning when the site doesn't have Elementor installed or activated.
+     *
+     * @since 1.0.0
+     *
+     * @access public
+     */
+	function progressbar_assets(){
+	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, '1.0', 'all');
+	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
+	    wp_enqueue_script('progressbar-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/plugaddons-main.js', array('jquery','jquery-numerator-js'), time(), true);
+    }
 
 	/**
 	 * Admin notice
@@ -228,10 +244,10 @@ final class Elementor_Plugaddons_Extension {
 	public function init_widgets() {
 
 		// Include Widget files
-		require_once(__DIR__ . '/widgets/first-widget.php');
+		require_once(__DIR__ . '/widgets/progressbar-wiget.php');
 
 		// Register widget
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_First_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar_Widget() );
 
 	}
 

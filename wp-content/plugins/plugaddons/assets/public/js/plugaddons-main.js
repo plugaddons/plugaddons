@@ -5,9 +5,9 @@
             var EF = elementorFrontend,
                 EM = elementorModules;
             EF.waypoint($scope, function () {
-                $scope.find('.ha-skill-level').each(function () {
+                $scope.find('.pla-skill-level').each(function () {
                     var $current = $(this),
-                        $lt = $current.find('.ha-skill-level-text'),
+                        $lt = $current.find('.pla-skill-level-text'),
                         lv = $current.data('level');
                     $current.animate({
                         width: lv + '%'

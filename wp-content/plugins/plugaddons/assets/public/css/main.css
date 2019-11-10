@@ -1,5 +1,5 @@
 
-.ha-slick-content {
+.pla-slick-content {
     position: absolute;
     bottom: 0;
     padding: 1.5rem;
@@ -8,102 +8,166 @@
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .3))
 }
 
-.ha-slick-title {
+.pla-slick-title {
     margin-top: 0;
     margin-bottom: .2rem;
     color: #fff;
     font-size: 20px
 }
 
-.ha-slick-subtitle {
+.pla-slick-subtitle {
     margin: 0;
     color: #fff
 }
 
-.ha-skills>.elementor-widget-container {
+.pla-skills > .elementor-widget-container {
     padding-top: 1px
 }
 
-.ha-skill {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
+.pla-skill {
     display: flex;
-    border-radius: 15px;
-    background-color: #e9ecef;
+    background-color: #CECECE;
     font-size: .75rem
 }
 
-.ha-skill--inside .ha-skill-info,
-.ha-skill--outside .ha-skill-info {
+.pla-skill--style-one .pla-skill-info,
+.pla-skill--style-two .pla-skill-info,
+.pla-skill--style-three .pla-skill-info,
+.pla-skill--style-four .pla-skill-info,
+.pla-skill--style-five .pla-skill-info
+{
     text-align: left;
     font-size: 14px;
     line-height: 1
 }
 
-.ha-skill--inside .ha-skill-level-text,
-.ha-skill--outside .ha-skill-level-text {
+.pla-skill--style-one .pla-skill-level-text,
+.pla-skill--style-two .pla-skill-level-text,
+.pla-skill--style-three .pla-skill-level-text,
+.pla-skill--style-four .pla-skill-level-text,
+.pla-skill--style-five .pla-skill-level-text
+{
     float: right
 }
-
-.ha-skill--outside {
-    height: 2px
+.pla-skill--style-four .pla-skill-level-text {
+    color: #fff;
+    position: absolute;
+    right: -46px;
+    top: -31px;
+    z-index: 2;
+    width: 46px;
+    height: 55px;
+    background: transparent;
+    line-height: 55px;
+    text-align: center;
+}
+.pla-skill-level-text-four:after {
+    top: -3px;
+    position: absolute;
+    content: "";
+    border-style: solid;
+    border-width: 30px 0 30px 50px;
+    border-color: transparent transparent transparent #0C2461;
+    right: -4px;
+    z-index: -1;
+}
+.pla-skill--style-five .pla-skill-level-text {
+    position: absolute;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background: #0C2461;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    right: -1px;
+    padding-left: 1px;
+}
+.pla-skill--style-two {
+    height: 10px;
+    border-radius: 10px;
 }
 
-.ha-skill--outside .ha-skill-level {
+.pla-skill--style-three {
+    height: 3px;
+}
+
+.pla-skill--style-four {
+    height: 10px;
+}
+.pla-skill--style-five{
+    height: 10px;
+}
+
+.pla-skill--style-two .pla-skill-level,
+.pla-skill--style-three .pla-skill-level,
+.pla-skill--style-four .pla-skill-level,
+.pla-skill--style-five .pla-skill-level
+{
     position: relative
 }
 
-.ha-skill--outside .ha-skill-info {
+.pla-skill--style-two .pla-skill-info,
+.pla-skill--style-three .pla-skill-info,
+.pla-skill--style-four .pla-skill-info,
+.pla-skill--style-five .pla-skill-info
+{
     position: absolute;
     top: -25px;
     width: 100%;
     color: #242424
 }
 
-.ha-skill--inside {
+.pla-skill--style-one {
     height: 30px
 }
 
-.ha-skill--inside .ha-skill-info {
+.pla-skill--style-one .pla-skill-info {
     padding-right: 1rem;
     padding-left: 1rem;
-    color: #fff
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1;
+    margin-top: 1px;
 }
 
-.ha-skill-level {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
+.pla-skill-level {
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     width: 10%;
     border-radius: inherit;
-    background-color: #562dd4;
+    background-color: #0C2461;
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    -webkit-transition: width .6s ease;
     transition: width .6s ease
 }
 
-.ha-skill--outside {
+.pla-skill--style-two,
+.pla-skill--style-three {
     margin-top: 40px
 }
 
-.ha-skill--inside:not(:first-child) {
+.pla-skill--style-four {
+    margin-top: 65px;
+}
+
+.pla-skill--style-two:first-child {
     margin-top: 20px
 }
 
-.ha-skill-name {
+.pla-skill--style-one:not(:first-child)
+{
+    margin-top: 20px
+}
+.pla-skill--style-five{
+    margin-top: 40px;
+}
+.pla-skill-name {
     display: inline-block;
     overflow: hidden;
     max-width: 70%;

@@ -153,7 +153,7 @@ final class Elementor_Plugaddons_Extension {
      * @access public
      */
 	function progressbar_assets(){
-	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, '1.0', 'all');
+	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
 	    wp_enqueue_script('progressbar-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/plugaddons-main.js', array('jquery','jquery-numerator-js'), time(), true);
     }

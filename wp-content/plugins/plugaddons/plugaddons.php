@@ -100,7 +100,7 @@ final class Elementor_Plugaddons_Extension {
 	 */
 	public function i18n() {
 
-		load_plugin_textdomain( 'plugaddons' );
+		load_plugin_textdomain( 'plugaddons', false, dirname(__FILE__). '/languages' );
 
 	}
 

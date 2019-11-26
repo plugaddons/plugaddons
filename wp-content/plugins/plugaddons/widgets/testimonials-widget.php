@@ -130,8 +130,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     'grid-style-two' => __('Style Two', 'plugaddons'),
                     'grid-style-three' => __('Style Three', 'plugaddons'),
                     'grid-style-four' => __('Style Four', 'plugaddons'),
-                    'grid-style-five' => __('Style Five', 'plugaddons'),
-                    'grid-style-six' => __('Style Six', 'plugaddons'),
+                    'grid-style-five' => __('Style Five', 'plugaddons')
                 ],
                 'condition' => ['view' => 'style-one'],
                 'style_transfer' => true,
@@ -164,7 +163,10 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
                 ],
-                'condition' => ['view' => 'style-one'],
+                'condition' => [
+                        'view' => 'style-one',
+                        'grid_view' => array('grid-style-two', 'grid-style-five'),
+                ],
             ]
         );
         $this->add_control(
@@ -563,7 +565,9 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 </div>
                 <div class="pla-testimonial-style-two clearfix">
                     <div class="pla-author-img">
-                        <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
+                        <div class="pla-authoe-img-wrap">
+                            <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
+                        </div>
                         <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
                         <span <?php echo $this->get_render_attribute_string('testimonial_designation') ?>><?php echo esc_html($designation); ?></span>
                     </div>
@@ -600,22 +604,60 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
     protected function _content_template()
     {
         ?>
+
         <#
         view.addInlineEditingAttributes('testimonial_content', 'none');
+        view.addRenderAttribute('testimonial_content',{
+            'class':"grid-content grid-content--{{{settings.grid_view}}}"
+        });
         view.addInlineEditingAttributes('testimonial_name', 'none');
+        view.addRenderAttribute('testimonial_name',{
+            'class':"grid-name grid-name--{{{settings.grid_view}}}"
+        });
         view.addInlineEditingAttributes('testimonial_designation', 'none');
+        view.addRenderAttribute('testimonial_designation',{
+            'class':"grid-designation grid-designation--{{{settings.grid_view}}}"
+        });
         #>
-        <div class="pla-testimonial-box">
-            <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
-            <div class="ratings">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+        <div class="pla-testimonial-box pla-testimonial--{{{settings.grid_view}}}">
+            <div class="pla-testimonial-box-inner clearfix">
+                <div class="pla-testimonial-style-one">
+                    <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
+                    <div class="ratings">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>
+                    <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
+
+                </div>
+                <div class="pla-testimonial-style-two clearfix">
+                    <div class="pla-author-img">
+                        <div class="pla-authoe-img-wrap">
+                            <img src="{{ settings.testimonial_image.url }}">
+                        </div>
+                        <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>
+                        <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
+                    </div>
+                    <div class="pla-author-content">
+                        <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
+                        <div class="ratings">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-            <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>
-            <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
+            <div class="quote-one"></div>
+            <div class="quote-two"></div>
         </div>
         <?php
     }

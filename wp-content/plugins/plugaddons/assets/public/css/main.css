@@ -34,8 +34,7 @@
 .pla-skill--style-two .pla-skill-info,
 .pla-skill--style-three .pla-skill-info,
 .pla-skill--style-four .pla-skill-info,
-.pla-skill--style-five .pla-skill-info
-{
+.pla-skill--style-five .pla-skill-info {
     text-align: left;
     font-size: 14px;
     line-height: 1
@@ -45,10 +44,10 @@
 .pla-skill--style-two .pla-skill-level-text,
 .pla-skill--style-three .pla-skill-level-text,
 .pla-skill--style-four .pla-skill-level-text,
-.pla-skill--style-five .pla-skill-level-text
-{
+.pla-skill--style-five .pla-skill-level-text {
     float: right
 }
+
 .pla-skill--style-four .pla-skill-level-text {
     color: #fff;
     position: absolute;
@@ -61,6 +60,7 @@
     line-height: 55px;
     text-align: center;
 }
+
 .pla-skill-level-text-four:after {
     top: -3px;
     position: absolute;
@@ -71,6 +71,7 @@
     right: -4px;
     z-index: -1;
 }
+
 .pla-skill--style-five .pla-skill-level-text {
     position: absolute;
     top: 10px;
@@ -84,6 +85,7 @@
     right: -1px;
     padding-left: 1px;
 }
+
 .pla-skill--style-two {
     height: 10px;
     border-radius: 10px;
@@ -96,23 +98,22 @@
 .pla-skill--style-four {
     height: 10px;
 }
-.pla-skill--style-five{
+
+.pla-skill--style-five {
     height: 10px;
 }
 
 .pla-skill--style-two .pla-skill-level,
 .pla-skill--style-three .pla-skill-level,
 .pla-skill--style-four .pla-skill-level,
-.pla-skill--style-five .pla-skill-level
-{
+.pla-skill--style-five .pla-skill-level {
     position: relative
 }
 
 .pla-skill--style-two .pla-skill-info,
 .pla-skill--style-three .pla-skill-info,
 .pla-skill--style-four .pla-skill-info,
-.pla-skill--style-five .pla-skill-info
-{
+.pla-skill--style-five .pla-skill-info {
     position: absolute;
     top: -25px;
     width: 100%;
@@ -160,20 +161,20 @@
     margin-top: 20px
 }
 
-.pla-skill--style-one:not(:first-child)
-{
+.pla-skill--style-one:not(:first-child) {
     margin-top: 20px
 }
-.pla-skill--style-five{
+
+.pla-skill--style-five {
     margin-top: 40px;
 }
+
 .pla-skill-name {
     display: inline-block;
     overflow: hidden;
     max-width: 70%;
     text-overflow: ellipsis
 }
-
 
 
 /*--------------------
@@ -185,6 +186,7 @@
     position: relative;
     z-index: 1;
 }
+
 .pla-testimonial-box:after {
     width: calc(100% - 56px);
     height: calc(100% - 64px);
@@ -195,12 +197,14 @@
     left: 28px;
     top: 32px;
 }
+
 .pla-testimonial-box .pla-testimonial-box-inner {
     padding: 65px 11px 26px;
     text-align: center;
     position: relative;
     z-index: 5;
 }
+
 .pla-testimonial-box .quote-one {
     position: absolute;
     left: 60px;
@@ -210,12 +214,14 @@
     background-color: #fff;
     z-index: 1;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-one .quote-one {
     width: 57px;
     height: 38px;
 }
+
 .pla-testimonial-box .quote-one:before,
-.pla-testimonial-box .quote-two:before{
+.pla-testimonial-box .quote-two:before {
     content: none;
     position: absolute;
     left: 8px;
@@ -227,17 +233,20 @@
     background-repeat: no-repeat;
     background-color: #fff;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-one .quote-one:before {
     content: "";
 
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-two .quote-one,
-.pla-testimonial-box.pla-testimonial--grid-style-two .quote-two{
+.pla-testimonial-box.pla-testimonial--grid-style-two .quote-two {
     width: 57px;
     height: 50px;
     left: auto;
     right: 20px;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-two .quote-two {
     left: 10px;
     bottom: 17px;
@@ -247,11 +256,13 @@
     height: 50px;
     width: 60px;
 }
-.pla-testimonial-box.pla-testimonial--grid-style-two .quote-one:before{
+
+.pla-testimonial-box.pla-testimonial--grid-style-two .quote-one:before {
     content: "";
     background-image: url(../img/quote-bottom.png);
     height: 76%;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-two .quote-two:before {
     content: "";
     background-image: url(../img/quote-top.png);
@@ -263,22 +274,35 @@
 .pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-style-one,
 .pla-testimonial-box.pla-testimonial--grid-style-one .pla-testimonial-style-two,
 .pla-testimonial-box.pla-testimonial--grid-style-three .pla-testimonial-style-two,
-.pla-testimonial-box.pla-testimonial--grid-style-four .pla-testimonial-style-two{
+.pla-testimonial-box.pla-testimonial--grid-style-four .pla-testimonial-style-two {
     display: none;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-box-inner {
     padding: 53px 11px 26px;
     text-align: center;
 }
-.pla-testimonial-style-two .pla-author-img {
+
+.pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-style-two .pla-author-img {
     float: left;
     width: 33.333%;
+    text-align: center;
 }
-
+.pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-style-two  .pla-authoe-img-wrap {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-style-two .pla-author-content {
+    float: left;
+    width: 66.666%;
+}
 .pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-box-inner {
     text-align: left;
 }
-.grid-name.grid-name--grid-style-two {
+
+
+.grid-name {
     margin: 0;
 }
 .pla-testimonial-box.pla-testimonial--grid-style-three {
@@ -288,18 +312,20 @@
     display: flex;
     align-items: center;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-three .pla-testimonial-box-inner {
     padding-bottom: 0;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-three:after {
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.16);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .16);
     border: none;
 }
 
 .grid-name.grid-name--grid-style-three,
-.grid-name.grid-name--grid-style-four{
+.grid-name.grid-name--grid-style-four {
     position: absolute;
     left: 50%;
     top: 23px;
@@ -307,7 +333,7 @@
 }
 
 .grid-name.grid-name--grid-style-three:after,
-.grid-name.grid-name--grid-style-four:after{
+.grid-name.grid-name--grid-style-four:after {
     position: absolute;
     content: "";
     background: #ddd;
@@ -317,11 +343,15 @@
     height: 3px;
     transform: translateX(-50%);
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-four {
     position: relative;
     padding: 60px 28px;
     background-color: transparent;
+    max-width: 360px;
+    max-height: 375px;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-four:before {
     background-image: url(../img/testimonial-four-background.png);
     background-color: transparent;
@@ -336,11 +366,13 @@
     position: absolute;
     z-index: 1;
 }
-.grid-name.grid-name--grid-style-four:after{
+
+.grid-name.grid-name--grid-style-four:after {
     background: #fff;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-three .quote-one,
-.pla-testimonial-box.pla-testimonial--grid-style-four .quote-one{
+.pla-testimonial-box.pla-testimonial--grid-style-four .quote-one {
     position: absolute;
     left: 50%;
     top: 52px;
@@ -351,14 +383,17 @@
     background-image: url("../img/quote-bg.png");
     transition: all .3s ease-in-out;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-three:hover .quote-one {
     background-image: url("../img/quote-bg-hover.png");
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-four .quote-one {
     background-image: url(../img/quote-bg-yollow.png);
     background-color: transparent;
     z-index: 5;
 }
+
 .pla-testimonial-box.pla-testimonial--grid-style-four:after {
     background: url(../img/testimonial-four-forground.png);
     border: none;
@@ -367,3 +402,78 @@
     z-index: 2;
 }
 
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-testimonial-style-one {
+    display: none;
+}
+
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-author-img {
+    float: none;
+    width: 100%;
+}
+
+.pla-testimonial-box.pla-testimonial--grid-style-five:after {
+    content: none;
+}
+
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap {
+    position: relative;
+    width: 91.02px;
+    height: 93.68px;
+    margin: 0 auto;
+    box-shadow: 0px 3px 7px 0px rgba(230, 40, 72, 0.004);
+
+}
+.pla-authoe-img-wrap img {
+    border-radius: 50%;
+    box-shadow: 0px 3px 68px 0px rgba(230, 40, 72, 0.004);
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap:after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: -18px;
+    width: 125%;
+    height: 122%;
+    background-image: url(../img/testimonial-author-bg.png);
+    background-size: cover;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-testimonial-box-inner {
+    padding: 23px 0 0;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-testimonial-box-inner .ratings{
+    display: none;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-author-content {
+    padding: 70px 0;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .quote-one,
+.pla-testimonial-box.pla-testimonial--grid-style-five .quote-two{
+    background-image: url(../img/quote-top.png);
+    width: 43px;
+    height: 36px;
+    background-size: cover;
+    background-position: center center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .quote-one {
+    transform: translate(-50%, -75%);
+}
+.pla-testimonial-box.pla-testimonial--grid-style-five .quote-two {
+    background-image: url(../img/quote-bottom.png);
+    bottom: 45px;
+    top: auto;
+    transform: translateX(-50%);
+}
+.grid-content.grid-content--grid-style-five{
+     margin: 0;
+ }
+.pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img {
+    width: 80px;
+    height: 80px;
+}

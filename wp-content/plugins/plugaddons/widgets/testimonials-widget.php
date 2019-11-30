@@ -195,7 +195,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'label' => __('Description', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'label_block' => true,
-                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ', 'plugaddons'),
+                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ', 'plugaddons'),
                 'condition' => ['view' => 'style-one'],
             ]
         );
@@ -212,9 +212,9 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     'rating-two' => __('2', 'plugaddons'),
                     'rating-two-half' => __('2.5', 'plugaddons'),
                     'rating-three' => __('3', 'plugaddons'),
-                    'rating-one-half' => __('3.5', 'plugaddons'),
+                    'rating-three-half' => __('3.5', 'plugaddons'),
                     'rating-four' => __('4', 'plugaddons'),
-                    'rating-one-half' => __('4.5', 'plugaddons'),
+                    'rating-four-half' => __('4.5', 'plugaddons'),
                     'rating-five' => __('5', 'plugaddons'),
                 ],
                 'default' => 'rating-five',
@@ -262,7 +262,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'label' => __('Description', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'label_block' => true,
-                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ', 'plugaddons'),
+                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.', 'plugaddons'),
             ]
         );
         $repeater->add_control(
@@ -274,13 +274,13 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'default' => 'rating-five',
                 'options' => [
                     'rating-one' => __('1', 'plugaddons'),
-                    'rating-one-half' => __('1.5', 'plugaddons'),
+                    'rating-half1' => __('1.5', 'plugaddons'),
                     'rating-two' => __('2', 'plugaddons'),
-                    'rating-two-half' => __('2.5', 'plugaddons'),
+                    'rating-half2' => __('2.5', 'plugaddons'),
                     'rating-three' => __('3', 'plugaddons'),
-                    'rating-one-half' => __('3.5', 'plugaddons'),
+                    'rating-half3' => __('3.5', 'plugaddons'),
                     'rating-four' => __('4', 'plugaddons'),
-                    'rating-one-half' => __('4.5', 'plugaddons'),
+                    'rating-half4' => __('4.5', 'plugaddons'),
                     'rating-five' => __('5', 'plugaddons'),
                 ],
             ]
@@ -440,7 +440,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill, {{WRAPPER}} .pla-skill-level' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-testimonial-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -472,7 +472,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'label' => __('Text Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill-info' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box-inner p' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -504,16 +504,17 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'info_typography',
-                'selector' => '{{WRAPPER}} .pla-skill-info',
+                'selector' => '{{WRAPPER}} .pla-testimonial-box p',
                 'scheme' => Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
 
+
         $this->add_group_control(
-            Group_Control_Text_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'info_text_shadow',
-                'selector' => '{{WRAPPER}} .pla-skill-info',
+                'name' => 'testimonial_box_shadow',
+                'selector' => '{{WRAPPER}} .pla-testimonial-box',
             ]
         );
     }
@@ -547,19 +548,14 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
         $this->add_render_attribute('testimonial_designation', [
             'class' => "grid-designation grid-designation--{$grid_view}"
         ]);
+        $rating = $settings['testimonial_rating'];
         ?>
         <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($grid_view); ?>">
             <div class="pla-testimonial-box-inner clearfix">
                 <?php if ($grid_view == 'grid-style-one'):?>
                 <div class="pla-testimonial-style-one">
                     <p <?php echo $this->get_render_attribute_string('testimonial_content') ?>><?php echo wp_kses_post($content); ?></p>
-                    <div class="ratings">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
+                    <div class="ratings <?php echo esc_attr($rating);?>"></div>
                     <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
                     <span <?php echo $this->get_render_attribute_string('testimonial_designation') ?>><?php echo esc_html($designation); ?></span>
                 </div>
@@ -575,13 +571,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     </div>
                     <div class="pla-author-content">
                         <p <?php echo $this->get_render_attribute_string('testimonial_content') ?>><?php echo wp_kses_post($content); ?></p>
-                        <div class="ratings">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+                        <div class="ratings <?php echo esc_attr($rating);?>"></div>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -590,13 +580,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     <div class="pla-author-content">
                         <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
                         <p <?php echo $this->get_render_attribute_string('testimonial_content') ?>><?php echo wp_kses_post($content); ?></p>
-                        <div class="ratings">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+                        <div class="ratings <?php echo esc_attr($rating);?>"></div>
                         <span <?php echo $this->get_render_attribute_string('testimonial_designation') ?>><?php echo esc_html($designation); ?></span>
                     </div>
                 </div>
@@ -640,19 +624,15 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
         #>
         <div class="pla-testimonial-box pla-testimonial--{{{settings.grid_view}}}">
             <div class="pla-testimonial-box-inner clearfix">
+                <# if (settings.grid_view == 'grid-style-one') { #>
                 <div class="pla-testimonial-style-one">
                     <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
-                    <div class="ratings">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
+                    <div class="ratings {{{settings.testimonial_rating}}}"></div>
                     <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>
                     <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
-
                 </div>
+                <# } #>
+                <# if (settings.grid_view == 'grid-style-two' || settings.grid_view == 'grid-style-five') { #>
                 <div class="pla-testimonial-style-two clearfix">
                     <div class="pla-author-img">
                         <div class="pla-authoe-img-wrap">
@@ -663,29 +643,19 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     </div>
                     <div class="pla-author-content">
                         <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
-                        <div class="ratings">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+                        <div class="ratings {{{settings.testimonial_rating}}}"></div>
                     </div>
                 </div>
+                <# } #>
+                <# if (settings.grid_view == 'grid-style-three' || settings.grid_view == 'grid-style-four') { #>
                 <div class="pla-testimonial-style-{{{settings.grid_view}}}">
                     <div class="pla-author-content">
                         <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>                        <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
-                        <div class="ratings">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+                        <div class="ratings {{{settings.testimonial_rating}}}"></div>
                         <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
                     </div>
                 </div>
-
+                <# } #>
             </div>
             <div class="quote-one"></div>
             <div class="quote-two"></div>

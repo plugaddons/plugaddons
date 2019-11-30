@@ -185,6 +185,8 @@
     padding: 32px 28px;
     position: relative;
     z-index: 1;
+    box-shadow: 0px 0px 8px 0px rgba(12, 36, 56, 0.08);
+    border-radius: 5px;
 }
 
 .pla-testimonial-box:after {
@@ -277,7 +279,9 @@
 .pla-testimonial-box.pla-testimonial--grid-style-four .pla-testimonial-style-two {
     display: none;
 }
-
+.pla-testimonial-box.pla-testimonial--grid-style-two {
+    overflow: hidden;
+}
 .pla-testimonial-box.pla-testimonial--grid-style-two .pla-testimonial-box-inner {
     padding: 53px 11px 26px;
     text-align: center;
@@ -338,10 +342,10 @@
     width: 360px;
     height: 375px;
     margin: 0 auto;
+    box-shadow: none;
 }
-.pla-testimonial-style-grid-style-three,
-.pla-testimonial-style-grid-style-four {
-    padding: 0 50px;
+.pla-testimonial-style-grid-style-three, .pla-testimonial-style-grid-style-four {
+    padding: 0 37px;
 }
 .pla-testimonial-box.pla-testimonial--grid-style-four .pla-testimonial-box-inner {
     padding: 40px 11px 26px;
@@ -484,4 +488,50 @@
 }
 .pla-testimonial-box.pla-testimonial--grid-style-five {
     padding: 32px 28px 30px;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-one .pla-testimonial-box-inner .pla-testimonial-style-one + .pla-testimonial-style-one{
+    display: none;
+}
+.grid-content.grid-content--grid-style-four {
+    color: #fff;
+}
+.ratings {
+    height: 13px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 106px;
+    margin: 0 auto 10px;
+}
+.ratings.rating-one {
+    background-image: url("../img/rating/1.png");
+}
+.ratings.rating-one-half {
+    background-image: url("../img/rating/1.5.png");
+}
+.ratings.rating-two {
+    background-image: url("../img/rating/2.png");
+}
+.ratings.rating-two-half {
+    background-image: url("../img/rating/2.5.png");
+}
+.ratings.rating-three {
+    background-image: url("../img/rating/3.png");
+}
+.ratings.rating-three-half {
+    background-image: url("../img/rating/3.5.png");
+}
+.ratings.rating-four {
+    background-image: url("../img/rating/4.png");
+}
+.ratings.rating-four-half {
+    background-image: url("../img/rating/4.5.png");
+}
+.ratings.rating-five {
+    background-image: url("../img/rating/5.png");
+}
+.pla-testimonial-box-inner p {
+    color: #BBB9B9;
+    font-size: 16px;
+    line-height: 30px;
+    font-style: italic;
 }

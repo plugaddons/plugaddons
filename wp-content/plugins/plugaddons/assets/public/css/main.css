@@ -343,7 +343,16 @@
     height: 3px;
     transform: translateX(-50%);
 }
-
+.pla-testimonial-box.pla-testimonial--grid-style-three .pla-testimonial-style-one {
+    padding: 25px;
+    position: relative;
+}
+.grid-name.grid-name--grid-style-three {
+    top: 0;
+}
+.pla-testimonial-box.pla-testimonial--grid-style-three .pla-testimonial-box-inner {
+    padding-top: 10px;
+}
 .pla-testimonial-box.pla-testimonial--grid-style-four {
     position: relative;
     padding: 60px 28px;

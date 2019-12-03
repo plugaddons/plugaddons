@@ -1,5 +1,4 @@
 ;(function ($) {
-
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/progressbar_widget.default', function ($scope) {
             var EF = elementorFrontend,

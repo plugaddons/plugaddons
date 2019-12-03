@@ -142,6 +142,7 @@ final class Elementor_Plugaddons_Extension {
         add_action( 'elementor/elements/categories_registered', [$this, 'register_new_category'] );
 
         add_action('elementor/frontend/after_enqueue_scripts',[$this,'progressbar_assets']);
+        add_action('elementor/editor/after_enqueue_scripts',[$this,'testimonials_editor_assets']);
 	}
     /**
      * Add Progress Bar JS
@@ -152,10 +153,22 @@ final class Elementor_Plugaddons_Extension {
      *
      * @access public
      */
-	function progressbar_assets(){
+	public function progressbar_assets(){
 	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
 	    wp_enqueue_script('progressbar-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/plugaddons-main.js', array('jquery','jquery-numerator-js'), time(), true);
+	}
+    /**
+     * Add Testimonials Carousel Editor JS
+     *
+     * Warning when the site doesn't have Elementor installed or activated.
+     *
+     * @since 1.0.0
+     *
+     * @access public
+     */
+    public function testimonials_editor_assets(){
+	   wp_enqueue_script('testimonials-editor-js', plugin_dir_url( __FILE__ ).'/assets/admin/js/testimonial.js', array('jquery'), '1.0.0', true);
     }
 
 	/**
@@ -246,10 +259,12 @@ final class Elementor_Plugaddons_Extension {
 		// Include Widget files
 		require_once(__DIR__ . '/widgets/progressbar-widget.php');
 		require_once(__DIR__ . '/widgets/testimonials-widget.php');
+		require_once(__DIR__ . '/widgets/testimonials-carousel-widget.php');
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel_Widget() );
 
 	}
 

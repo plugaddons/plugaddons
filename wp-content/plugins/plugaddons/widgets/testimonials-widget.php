@@ -38,7 +38,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
      */
     public function get_title()
     {
-        return __('Testimonials Widget', 'plugaddons');
+        return __('Testimonials Grid', 'plugaddons');
     }
 
     /**
@@ -111,13 +111,13 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'type' => Controls_Manager::SELECT,
                 'label' => __('Testimonials Grid', 'plugaddons'),
                 'separator' => 'before',
-                'default' => 'grid-style-one',
+                'default' => 'style-one',
                 'options' => [
-                    'grid-style-one' => __('Style One', 'plugaddons'),
-                    'grid-style-two' => __('Style Two', 'plugaddons'),
-                    'grid-style-three' => __('Style Three', 'plugaddons'),
-                    'grid-style-four' => __('Style Four', 'plugaddons'),
-                    'grid-style-five' => __('Style Five', 'plugaddons')
+                    'style-one' => __('Style One', 'plugaddons'),
+                    'style-two' => __('Style Two', 'plugaddons'),
+                    'style-three' => __('Style Three', 'plugaddons'),
+                    'style-four' => __('Style Four', 'plugaddons'),
+                    'style-five' => __('Style Five', 'plugaddons')
                 ],
                 'style_transfer' => true,
             ]
@@ -132,7 +132,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
                 ],
                 'condition' => [
-                        'grid_view' => array('grid-style-two', 'grid-style-five'),
+                        'grid_view' => array('style-two', 'style-five'),
                 ],
             ]
         );
@@ -204,7 +204,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
             [
                 'label' => __('Testimonial Style', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_STYLE,
-                'condition' => ['grid_view!' => 'grid-style-four']
+                'condition' => ['grid_view!' => 'style-four']
             ]
 
         );
@@ -215,10 +215,10 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'label' => __('Box Inner Border Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'grid_view' => array('grid-style-one', 'grid-style-two', 'grid-style-five'),
+                    'grid_view' => array('style-one', 'style-two', 'style-five'),
                 ],
                 'style_transfer' => true,
             ]
@@ -229,7 +229,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'name' => 'inner_box_shadow',
                 'label' => __( 'Inner Box Shadow', 'plugaddons' ),
                 'selector' => '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-authoe-img-wrap img',
-                'condition' => [ 'grid_view' => array('grid-style-three', 'grid-style-five')]
+                'condition' => [ 'grid_view' => array('style-three', 'style-five')]
             ]
 
         );
@@ -243,7 +243,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
-                'condition' => ['grid_view!' => 'grid-style-four']
+                'condition' => ['grid_view!' => 'style-four']
             ]
         );
 
@@ -253,7 +253,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'testimonial_box_shadow',
                 'selector' => '{{WRAPPER}} .pla-testimonial-box',
-                'condition' => ['grid_view!' => 'grid-style-four']
+                'condition' => ['grid_view!' => 'style-four']
             ]
         );
 
@@ -333,16 +333,16 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
         ?>
         <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($grid_view); ?>">
             <div class="pla-testimonial-box-inner clearfix">
-                <?php if ($grid_view == 'grid-style-one'):?>
-                <div class="pla-testimonial-style-one">
+                <?php if ($grid_view == 'style-one'):?>
+                <div class="pla-testimonial-<?php echo esc_attr($grid_view);?>">
                     <p <?php echo $this->get_render_attribute_string('testimonial_content') ?>><?php echo wp_kses_post($content); ?></p>
                     <div class="ratings <?php echo esc_attr($rating);?>"></div>
                     <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
                     <span <?php echo $this->get_render_attribute_string('testimonial_designation') ?>><?php echo esc_html($designation); ?></span>
                 </div>
                 <?php endif;?>
-                <?php if ($grid_view == 'grid-style-two' || $grid_view == 'grid-style-five'):?>
-                <div class="pla-testimonial-style-two clearfix">
+                <?php if ($grid_view == 'style-two' || $grid_view == 'style-five'):?>
+                <div class="pla-testimonial-<?php echo esc_attr($grid_view);?> clearfix">
                     <div class="pla-author-img">
                         <div class="pla-authoe-img-wrap">
                             <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
@@ -356,8 +356,8 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <?php endif; ?>
-                <?php if ($grid_view == 'grid-style-three' || $grid_view == 'grid-style-four'):?>
-                <div class="pla-testimonial-style-<?php echo esc_attr($grid_view);?>">
+                <?php if ($grid_view == 'style-three' || $grid_view == 'style-four'):?>
+                <div class="pla-testimonial-<?php echo esc_attr($grid_view);?>">
                     <div class="pla-author-content">
                         <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
                         <p <?php echo $this->get_render_attribute_string('testimonial_content') ?>><?php echo wp_kses_post($content); ?></p>
@@ -405,7 +405,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
         #>
         <div class="pla-testimonial-box pla-testimonial--{{{settings.grid_view}}}">
             <div class="pla-testimonial-box-inner clearfix">
-                <# if (settings.grid_view == 'grid-style-one') { #>
+                <# if (settings.grid_view == 'style-one') { #>
                 <div class="pla-testimonial-style-one">
                     <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>
                     <div class="ratings {{{settings.testimonial_rating}}}"></div>
@@ -413,7 +413,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     <span {{{view.getRenderAttributeString('testimonial_designation')}}}>{{{settings.testimonial_designation}}}</span>
                 </div>
                 <# } #>
-                <# if (settings.grid_view == 'grid-style-two' || settings.grid_view == 'grid-style-five') { #>
+                <# if (settings.grid_view == 'style-two' || settings.grid_view == 'style-five') { #>
                 <div class="pla-testimonial-style-two clearfix">
                     <div class="pla-author-img">
                         <div class="pla-authoe-img-wrap">
@@ -428,7 +428,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                     </div>
                 </div>
                 <# } #>
-                <# if (settings.grid_view == 'grid-style-three' || settings.grid_view == 'grid-style-four') { #>
+                <# if (settings.grid_view == 'style-three' || settings.grid_view == 'style-four') { #>
                 <div class="pla-testimonial-style-{{{settings.grid_view}}}">
                     <div class="pla-author-content">
                         <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>                        <p {{{view.getRenderAttributeString('testimonial_content')}}}>{{{settings.testimonial_content}}}</p>

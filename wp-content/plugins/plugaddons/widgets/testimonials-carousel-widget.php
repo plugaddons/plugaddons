@@ -23,7 +23,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
      */
     public function get_name()
     {
-        return 'testimonials_carousel_widget';
+        return 'testimonialsCarouselWidget';
     }
 
     /**
@@ -38,7 +38,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
      */
     public function get_title()
     {
-        return __('Testimonials Carousel Widget', 'plugaddons');
+        return __('Testimonials Carousel', 'plugaddons');
     }
 
     /**
@@ -112,18 +112,19 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'type' => Controls_Manager::SELECT,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'separator' => 'before',
-                'default' => 'carousel-style-one',
+                'default' => 'style-one',
                 'options' => [
-                    'carousel-style-one' => __('Style One', 'plugaddons'),
-                    'carousel-style-two' => __('Style Two', 'plugaddons'),
-                    'carousel-style-three' => __('Style Three', 'plugaddons'),
-                    'carousel-style-four' => __('Style Four', 'plugaddons'),
-                    'carousel-style-five' => __('Style Five', 'plugaddons'),
-                    'carousel-style-six' => __('Style Six', 'plugaddons'),
+                    'style-one' => __('Style One', 'plugaddons'),
+                    'style-two' => __('Style Two', 'plugaddons'),
+                    'style-three' => __('Style Three', 'plugaddons'),
+                    'style-four' => __('Style Four', 'plugaddons'),
+                    'style-five' => __('Style Five', 'plugaddons'),
+                    'style-six' => __('Style Six', 'plugaddons'),
                 ],
                 'style_transfer' => true,
             ]
-        );  $this->add_control(
+        );
+        $this->add_control(
             'style_select_hidden',
             [
                 'type' => Controls_Manager::HIDDEN,
@@ -135,7 +136,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $repeater = new Repeater();
 
         $repeater->add_control(
-            'testimonial_carousel_image',
+            'testimonial_image',
             [
                 'label' => __('Choose Image', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
@@ -145,9 +146,16 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
 
             ]
         );
-
         $repeater->add_control(
-            'testimonial_carousel_name',
+            'items_hidden_selector',
+            [
+                'type' => Controls_Manager::HIDDEN,
+                'label' => __('Items Hidden Selector', 'plugaddons'),
+                'default' => 'items_hidden_selector'
+            ]
+        );
+        $repeater->add_control(
+            'testimonial_name',
             [
                 'type' => Controls_Manager::TEXT,
                 'label' => __('Name', 'plugaddons'),
@@ -157,7 +165,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         );
 
         $repeater->add_control(
-            'testimonial_carousel_designation',
+            'testimonial_designation',
             [
                 'label' => __('Designation', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::TEXT,
@@ -167,7 +175,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             ]
         );
         $repeater->add_control(
-            'testimonial_carousel_content',
+            'testimonial_content',
             [
                 'label' => __('Description', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
@@ -258,7 +266,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'show_label' => false,
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
-                'title_field' => '<# print((testimonial_carousel_name) ? (testimonial_carousel_name) : "") #>',
+                'title_field' => '<# print((testimonial_name) ? (testimonial_name) : "") #>',
                 'default' => [
                     [
                         'testimonial_carousel_name' => 'SHEHAB KHAN',
@@ -316,7 +324,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'inner_box_shadow',
-                'label' => __( 'Inner Box Shadow', 'plugaddons' ),
+                'label' => __('Inner Box Shadow', 'plugaddons'),
                 'selector' => '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-authoe-img-wrap img',
             ]
 
@@ -383,7 +391,6 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         );
 
 
-
     }
 
     /**
@@ -398,7 +405,32 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-
+        $view = $settings['carousel_view'];
+        $testimonials = $settings['testimonials'];
+        //$img = isset($settings['testimonial_image']) ? $settings['testimonial_image'] : array();
+        ?>
+        <div class="testimonial-carousel slick-slider">
+            <?php foreach ($testimonials as $testimonial):
+                $content = isset($testimonial['testimonial_content']) ? $testimonial['testimonial_content'] : '';
+                $name = isset($testimonial['testimonial_name']) ? $testimonial['testimonial_name'] : '';
+                $designation = isset($testimonial['testimonial_designation']) ? $testimonial['testimonial_designation'] : '';
+                $rating = $testimonial['testimonial_rating'];
+                ?>
+                <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($view); ?>">
+                    <div class="pla-testimonial-box-inner clearfix">
+                        <div class="pla-testimonial">
+                            <p><?php echo wp_kses_post($content); ?></p>
+                            <div class="ratings <?php echo esc_attr($rating); ?>"></div>
+                            <h6><?php echo esc_html($name); ?></h6>
+                            <span><?php echo esc_html($designation); ?></span>
+                        </div>
+                    </div>
+                    <div class="quote-one"></div>
+                    <div class="quote-two"></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php
 
     }
 

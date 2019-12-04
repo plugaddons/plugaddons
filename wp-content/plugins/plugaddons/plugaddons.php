@@ -141,7 +141,7 @@ final class Elementor_Plugaddons_Extension {
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'init_widgets' ] );
         add_action( 'elementor/elements/categories_registered', [$this, 'register_new_category'] );
 
-        add_action('elementor/frontend/after_enqueue_scripts',[$this,'progressbar_assets']);
+        add_action('elementor/frontend/after_enqueue_scripts',[$this,'pla_assets_files']);
         add_action('elementor/editor/after_enqueue_scripts',[$this,'testimonials_editor_assets']);
 	}
     /**
@@ -153,10 +153,14 @@ final class Elementor_Plugaddons_Extension {
      *
      * @access public
      */
-	public function progressbar_assets(){
+	public function pla_assets_files(){
+	    wp_enqueue_style('slick-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick.css', null, '1.0.0', 'all');
+	    wp_enqueue_style('slick-theme-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick-theme.css', null, '1.0.0', 'all');
 	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
-	    wp_enqueue_script('progressbar-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/plugaddons-main.js', array('jquery','jquery-numerator-js'), time(), true);
+	    wp_enqueue_script('slick-js', plugin_dir_url( __FILE__ ).'/assets/public/js/slick.min.js', array('jquery'), '1.0.0', true);
+	    wp_enqueue_script('pla-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/pla-main.js', array('jquery','jquery-numerator-js'), time(), true);
+
 	}
     /**
      * Add Testimonials Carousel Editor JS
@@ -168,7 +172,7 @@ final class Elementor_Plugaddons_Extension {
      * @access public
      */
     public function testimonials_editor_assets(){
-	   wp_enqueue_script('testimonials-editor-js', plugin_dir_url( __FILE__ ).'/assets/admin/js/testimonial.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script('testimonials-editor-js', plugin_dir_url( __FILE__ ).'/assets/admin/js/editor.js', array('jquery'), time(), true);
     }
 
 	/**

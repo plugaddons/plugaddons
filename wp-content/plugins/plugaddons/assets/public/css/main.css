@@ -227,7 +227,12 @@
     width: 57px;
     height: 38px;
 }
-
+.grid-name.grid-name--style-two {
+    margin-bottom: 0;
+}
+.grid-designation.grid-designation--style-two {
+    margin-bottom: 15px;
+}
 .pla-testimonial-box .quote-one:before,
 .pla-testimonial-box .quote-two:before {
     content: none;
@@ -588,6 +593,7 @@ Testimonial Carousel
     background-color: #fff;
     color: #8c8c8c !important;
     box-shadow: 0 14px 5px -12px rgba(0,0,0,0.42), 0 4px 10px 0 rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.2) !important;
+    border: none !important;
 }
 .slick-next, .slick-prev, .slick-next, .slick-prev {
     z-index: 999;

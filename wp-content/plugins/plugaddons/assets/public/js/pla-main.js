@@ -24,7 +24,7 @@
         });
         elementorFrontend.hooks.addAction('frontend/element_ready/testimonialsCarouselWidget.default', function ($scope) {
             $scope.find('.testimonial-carousel').slick({
-                slidesToShow: 1,
+                slidesToShow: 3,
                 autoplay: false,
                 //infinite: false,
                 autoplaySpeed: '3000',

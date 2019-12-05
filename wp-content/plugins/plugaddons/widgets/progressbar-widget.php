@@ -38,7 +38,7 @@ class Plugaddons_Progressbar_Widget extends \Elementor\Widget_Base
      */
     public function get_title()
     {
-        return __('Progressbar Widget', 'plugaddons');
+        return __('Skills', 'plugaddons');
     }
 
     /**

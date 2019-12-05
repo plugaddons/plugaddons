@@ -298,7 +298,7 @@
     width: 33.333%;
     text-align: center;
 }
-.pla-testimonial-box.pla-testimonial--style-two .pla-testimonial-style-two .pla-authoe-img-wrap img {
+.pla-testimonial-box.pla-testimonial--style-two .pla-testimonial-style-two .pla-author-img-wrap img {
     width: 100px;
     height: 100px;
     margin: 0 auto 20px;
@@ -453,7 +453,7 @@
 .pla-testimonial-box.pla-testimonial--style-five:after {
     content: none;
 }
-.pla-testimonial-box.pla-testimonial--style-five .pla-authoe-img-wrap img {
+.pla-testimonial-box.pla-testimonial--style-five .pla-author-img-wrap img {
     width: 80px;
     height: 80px;
     border-radius: 41% 59% 59% 41% / 43% 32% 68% 57%;
@@ -495,7 +495,7 @@
 .grid-content.grid-content--style-five{
      margin: 0;
  }
-.pla-testimonial-box.pla-testimonial--style-five .pla-authoe-img-wrap img {
+.pla-testimonial-box.pla-testimonial--style-five .pla-author-img-wrap img {
     width: 80px;
     height: 80px;
 }
@@ -603,8 +603,193 @@ Testimonial Carousel
 .slick-prev:before, .slick-next:before {
     content: none !important;
 }
-.slick-list.draggable {
-    padding: 15px 0;
+.testimonial-carousel .slick-list.draggable {
+    padding: 15px 0 !important;
     margin-left: -7.5px;
     margin-right: -7.5px;
+}
+.testimonial-carousel.style-two .slick-dots li button {
+    background: #4A4949;
+}
+.testimonial-carousel.style-two .slick-dots li.slick-active button,
+.testimonial-carousel.style-two .slick-dots li:hover button {
+    background: #E62848;
+}
+.testimonial-carousel.style-two .slick-dots li.slick-active button{
+    width: 23px !important;
+    height: 23px;
+}
+.slick-dots {
+    position: relative;
+    bottom: 0;
+    margin: 30px 0 0;
+}
+.slick-dots li {
+    width: 30px !important;
+    height: 30px !important;
+}
+.testimonial-carousel.style-two .slick-prev {
+    left: 100px;
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
+.testimonial-carousel.style-two:hover .slick-prev {
+    left: 50px;
+    visibility: visible;
+    opacity: 1;
+}
+.testimonial-carousel.style-two .slick-next {
+    right: 100px;
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
+.testimonial-carousel.style-two:hover .slick-next {
+    right: 50px;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two {
+    position: relative;
+    padding: 0;
+    box-shadow: none;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two:focus{
+    outline: none;
+}
+
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial,
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two{
+    text-align: center;
+}
+
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two {
+    margin-top: 75px;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two h6 {
+    margin: 0;
+    color: #AAA6A6;
+    font-size: 14px;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two span {
+    color: #E62848;
+    font-size: 12px;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two:after {
+    content: none;
+}
+.testimonial-carousel .ratings {
+    height: 13px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 106px;
+    margin: 0 auto 10px;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two.slick-current.slick-active .pla-testimonial-box-inner,
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial-box-inner:hover{
+    background-color: #E62848;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two {
+    position: relative;
+    padding: 0;
+    box-shadow: none;
+    background: transparent;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial-box-inner:after {
+    position: absolute;
+    right: 25px;
+    bottom: 0px;
+    width: 89px;
+    height: 63px;
+    z-index: 9;
+    content: "";
+    background-image: url(../img/quote-down-black.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .quote-two {
+    left: 25px;
+    top: -15px;
+    background: transparent;
+    height: 75px;
+    width: 89px;
+    z-index: 10;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .quote-one{
+    width: 0;
+    height: 0;
+    position: inherit;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .quote-two:before{
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .quote-two:before {
+    background-image: url(../img/quote-top-black.png);
+    background-color: transparent;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial-box-inner {
+    padding: 80px 45px;
+    border-radius: 5px;
+    background-color: #27242A;
+    transition: background-color .3s ease-in-out;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial p {
+    color: #fff;
+    font-size: 22px;
+    line-height: 33px;
+    font-style: normal;
+    margin: 0;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-author-img-wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #1E1B21;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 9;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two:hover {
+    box-shadow: 0 0px 10px 0 rgba(9,30,66,.15);
+    transform: translateY(0);
+}
+.testimonial-carousel.style-two .slick-list.draggable {
+    padding-top: 50px !important;
+}
+.testimonial-carousel.style-two .pla-testimonial-box.pla-testimonial--style-two.slick-slide.slick-current.slick-active.slick-center{
+    margin-top: -50px;
+    transition: all .3s ease-in-out;
+}
+.testimonial-carousel .pla-testimonial-box.pla-testimonial--style-three {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+.testimonial-carousel .pla-testimonial--style-three.pla-testimonial-box:after {
+    content: none;
 }

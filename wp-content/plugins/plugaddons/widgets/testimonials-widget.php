@@ -215,7 +215,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 'label' => __('Box Inner Border Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--style-five .pla-author-img-wrap img' => 'border-color: {{VALUE}};',
                 ],
                 'condition' => [
                     'grid_view' => array('style-one', 'style-two', 'style-five'),
@@ -228,7 +228,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'inner_box_shadow',
                 'label' => __( 'Inner Box Shadow', 'plugaddons' ),
-                'selector' => '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-authoe-img-wrap img',
+                'selector' => '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-author-img-wrap img',
                 'condition' => [ 'grid_view' => array('style-three', 'style-five')]
             ]
 
@@ -344,7 +344,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 <?php if ($grid_view == 'style-two' || $grid_view == 'style-five'):?>
                 <div class="pla-testimonial-<?php echo esc_attr($grid_view);?> clearfix">
                     <div class="pla-author-img">
-                        <div class="pla-authoe-img-wrap">
+                        <div class="pla-author-img-wrap">
                             <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
                         </div>
                         <h6 <?php echo $this->get_render_attribute_string('testimonial_name') ?>><?php echo esc_html($name); ?></h6>
@@ -416,7 +416,7 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                 <# if (settings.grid_view == 'style-two' || settings.grid_view == 'style-five') { #>
                 <div class="pla-testimonial-style-two clearfix">
                     <div class="pla-author-img">
-                        <div class="pla-authoe-img-wrap">
+                        <div class="pla-author-img-wrap">
                             <img src="{{ settings.testimonial_image.url }}">
                         </div>
                         <h6 {{{view.getRenderAttributeString('testimonial_name')}}}>{{{settings.testimonial_name}}}</h6>

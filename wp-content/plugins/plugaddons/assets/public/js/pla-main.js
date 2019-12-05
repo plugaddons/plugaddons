@@ -23,14 +23,13 @@
             });
         });
         elementorFrontend.hooks.addAction('frontend/element_ready/testimonialsCarouselWidget.default', function ($scope) {
-
             $scope.find('.testimonial-carousel').slick({
-                slidesToShow: 3,
+                slidesToShow: 1,
                 autoplay: false,
                 //infinite: false,
                 autoplaySpeed: '3000',
                 dots: true,
-                centerMode: false,
+                centerMode: true,
                 centerPadding: '50px',
                 rows: 0,
                 prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left"></i></button>',
@@ -63,3 +62,6 @@
     });
 
 })(jQuery);
+
+
+

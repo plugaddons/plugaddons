@@ -269,21 +269,138 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'title_field' => '<# print((testimonial_name) ? (testimonial_name) : "") #>',
                 'default' => [
                     [
-                        'testimonial_carousel_name' => 'SHEHAB KHAN',
+                        'testimonial_name' => 'SHEHAB KHAN',
                     ],
                     [
-                        'testimonial_carousel_name' => 'SHARIAR HOSSAIN',
+                        'testimonial_name' => 'SHARIAR HOSSAIN',
                     ],
                     [
-                        'testimonial_carousel_name' => 'SHOHEL KHAN',
+                        'testimonial_name' => 'SHOHEL KHAN',
                     ],
                     [
-                        'testimonial_carousel_name' => 'AL SHAHRIAR',
+                        'testimonial_name' => 'AL SHAHRIAR',
                     ],
                     [
-                        'testimonial_carousel_name' => 'ABDULL AL AHAD',
+                        'testimonial_name' => 'ABDULL AL AHAD',
                     ]
                 ]
+            ]
+        );
+
+        $this->end_controls_section();
+        $this->start_controls_section(
+            '_section_settings',
+            [
+                'label' => __('Settings', 'plugaddons'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+        $this->add_control(
+            'loop',
+            [
+                'label' => __('Infinite Loop?', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'plugaddons'),
+                'label_off' => __('No', 'plugaddons'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'frontend_available' => true,
+            ]
+        );
+        $this->add_control(
+            'autoplay',
+            [
+                'label' => __('Autoplay?', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'plugaddons'),
+                'label_off' => __('No', 'plugaddons'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'frontend_available' => true,
+            ]
+        );
+
+        $this->add_control(
+            'autoplay_speed',
+            [
+                'label' => __('Autoplay Speed', 'plugaddons'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 100,
+                'step' => 100,
+                'max' => 10000,
+                'default' => 3000,
+                'description' => __('Autoplay speed in milliseconds', 'plugaddons'),
+                'condition' => [
+                    'autoplay' => 'yes'
+                ],
+                'frontend_available' => true,
+            ]
+        );
+
+        $this->add_control(
+            'animation_speed',
+            [
+                'label' => __('Animation Speed', 'plugaddons'),
+                'type' => Controls_Manager::NUMBER,
+                'min' => 100,
+                'step' => 10,
+                'max' => 10000,
+                'default' => 300,
+                'description' => __('Slide speed in milliseconds', 'plugaddons'),
+                'frontend_available' => true,
+            ]
+        );
+
+
+        $this->add_control(
+            'center',
+            [
+                'label' => __('Center Mode?', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'plugaddons'),
+                'label_off' => __('No', 'plugaddons'),
+                'return_value' => 'yes',
+                'description' => __('Best works with odd number of slides (Slides To Show) and loop (Infinite Loop)', 'plugaddons'),
+                'frontend_available' => true,
+                'style_transfer' => true,
+            ]
+        );
+
+        $this->add_control(
+            'navigation',
+            [
+                'label' => __('Navigation', 'plugaddons'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'none' => __('None', 'plugaddons'),
+                    'arrow' => __('Arrow', 'plugaddons'),
+                    'dots' => __('Dots', 'plugaddons'),
+                    'both' => __('Arrow & Dots', 'plugaddons'),
+                ],
+                'default' => 'arrow',
+                'frontend_available' => true,
+                'style_transfer' => true,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'slides_to_show',
+            [
+                'label' => __('Slides To Show', 'plugaddons'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    1 => __('1 Slide', 'plugaddons'),
+                    2 => __('2 Slides', 'plugaddons'),
+                    3 => __('3 Slides', 'plugaddons'),
+                    4 => __('4 Slides', 'plugaddons'),
+                    5 => __('5 Slides', 'plugaddons'),
+                    6 => __('6 Slides', 'plugaddons'),
+                ],
+                'desktop_default' => 4,
+                'tablet_default' => 3,
+                'mobile_default' => 2,
+                'frontend_available' => true,
+                'style_transfer' => true,
             ]
         );
 
@@ -407,24 +524,38 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         $view = $settings['carousel_view'];
         $testimonials = $settings['testimonials'];
-        //$img = isset($settings['testimonial_image']) ? $settings['testimonial_image'] : array();
+
         ?>
-        <div class="testimonial-carousel slick-slider">
+        <div class="testimonial-carousel <?php echo esc_attr($view);?>">
             <?php foreach ($testimonials as $testimonial):
                 $content = isset($testimonial['testimonial_content']) ? $testimonial['testimonial_content'] : '';
                 $name = isset($testimonial['testimonial_name']) ? $testimonial['testimonial_name'] : '';
                 $designation = isset($testimonial['testimonial_designation']) ? $testimonial['testimonial_designation'] : '';
                 $rating = $testimonial['testimonial_rating'];
+                $img = isset($testimonial['testimonial_image']) ? $testimonial['testimonial_image'] : array();
                 ?>
                 <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($view); ?>">
                     <div class="pla-testimonial-box-inner clearfix">
                         <div class="pla-testimonial">
                             <p><?php echo wp_kses_post($content); ?></p>
+                            <?php if ($view == 'style-one'): ?>
+                                <div class="ratings <?php echo esc_attr($rating); ?>"></div>
+                                <h6><?php echo esc_html($name); ?></h6>
+                                <span><?php echo esc_html($designation); ?></span>
+                            <?php endif; ?>
+                        </div>
+
+                    </div>
+                    <?php if ($view != 'style-one'): ?>
+                        <div class="pla-author-img-wrap">
+                            <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
+                        </div>
+                    <div class="pla-testimonial--<?php echo esc_attr($view);?>">
                             <div class="ratings <?php echo esc_attr($rating); ?>"></div>
                             <h6><?php echo esc_html($name); ?></h6>
                             <span><?php echo esc_html($designation); ?></span>
-                        </div>
                     </div>
+                    <?php endif; ?>
                     <div class="quote-one"></div>
                     <div class="quote-two"></div>
                 </div>

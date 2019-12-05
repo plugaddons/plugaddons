@@ -582,8 +582,6 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="quote-one"></div>
             <div class="quote-two"></div>
@@ -653,8 +651,6 @@ class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div class="quote-one"></div>
             <div class="quote-two"></div>

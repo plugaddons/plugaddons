@@ -18,7 +18,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
      */
     public function get_name()
     {
-        return 'testimonialsCarouselWidget';
+        return 'testimonials-carousel';
     }
 
     /**
@@ -487,12 +487,6 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
 
         $this->end_controls_section();
 
-
-
-
-
-
-
     }
 
     /**
@@ -511,7 +505,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $testimonials = $settings['testimonials'];
 
         ?>
-        <div class="testimonial-carousel <?php echo esc_attr($view); ?>">
+        <div class="testimonial-carousel <?php echo $this->get_name();?> <?php echo esc_attr($view); ?>">
             <?php foreach ($testimonials as $index => $testimonial):
                 $content = isset($testimonial['testimonial_content']) ? $testimonial['testimonial_content'] : '';
                 $name = isset($testimonial['testimonial_name']) ? $testimonial['testimonial_name'] : '';

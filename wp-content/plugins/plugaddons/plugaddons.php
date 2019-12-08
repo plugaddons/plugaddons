@@ -263,11 +263,13 @@ final class Elementor_Plugaddons_Extension {
 		// Include Widget files
 		require_once(__DIR__ . '/widgets/progressbar-widget.php');
 		require_once(__DIR__ . '/widgets/testimonials-widget.php');
+		require_once(__DIR__ . '/widgets/carousel.php');
 		require_once(__DIR__ . '/widgets/testimonials-carousel-widget.php');
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Carousel_Widget() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel_Widget() );
 
 	}

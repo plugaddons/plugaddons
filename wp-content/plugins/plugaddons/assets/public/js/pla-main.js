@@ -22,13 +22,18 @@
                 });
             });
         });
-        elementorFrontend.hooks.addAction('frontend/element_ready/testimonialsCarouselWidget.default', function ($scope) {
-            $scope.find('.testimonial-carousel').slick({
+        elementorFrontend.hooks.addAction('frontend/element_ready/testimonialsCarouselWidget.default', function (scope, $) {
+            var $slick = $(scope).find('.testimonial-carousel');
+            var $slickSettings = $slick.data('settings');
+
+
+            $(scope).find('.testimonial-carousel').slick({
                 slidesToShow: 3,
                 autoplay: false,
                 //infinite: false,
                 autoplaySpeed: '3000',
                 dots: true,
+                //fade: true,
                 centerMode: true,
                 centerPadding: '50px',
                 rows: 0,

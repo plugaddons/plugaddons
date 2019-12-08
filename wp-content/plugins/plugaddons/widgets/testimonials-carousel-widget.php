@@ -2,11 +2,6 @@
 
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Text_Shadow;
-use Elementor\Group_Control_Typography;
-use Elementor\Repeater;
-use Elementor\Scheme_Typography;
 
 class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
 {
@@ -101,7 +96,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             '_section_testimonials',
             [
                 'label' => __('Testimonials', 'plugaddons'),
-                'tab' => Controls_Manager::TAB_CONTENT,
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
 
@@ -109,7 +104,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'carousel_view',
             [
-                'type' => Controls_Manager::SELECT,
+                'type' => \Elementor\Controls_Manager::SELECT,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'separator' => 'before',
                 'default' => 'style-one',
@@ -127,13 +122,13 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'style_select_hidden',
             [
-                'type' => Controls_Manager::HIDDEN,
+                'type' => \Elementor\Controls_Manager::HIDDEN,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'default' => 'style_select_hidden'
             ]
         );
 
-        $repeater = new Repeater();
+        $repeater = new \Elementor\Repeater();
 
         $repeater->add_control(
             'testimonial_image',
@@ -149,7 +144,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $repeater->add_control(
             'items_hidden_selector',
             [
-                'type' => Controls_Manager::HIDDEN,
+                'type' => \Elementor\Controls_Manager::HIDDEN,
                 'label' => __('Items Hidden Selector', 'plugaddons'),
                 'default' => 'items_hidden_selector'
             ]
@@ -157,7 +152,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $repeater->add_control(
             'testimonial_name',
             [
-                'type' => Controls_Manager::TEXT,
+                'type' => \Elementor\Controls_Manager::TEXT,
                 'label' => __('Name', 'plugaddons'),
                 'default' => __('SHEHAB KHAN', 'plugaddons'),
                 'placeholder' => __('Type a name', 'plugaddons'),
@@ -206,65 +201,11 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        $repeater->add_control(
-            'customize',
-            [
-                'label' => __('Want To Customize?', 'plugaddons'),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'plugaddons'),
-                'label_off' => __('No', 'plugaddons'),
-                'return_value' => 'yes',
-                'description' => __('You can customize this skill bar color from here or customize from Style tab', 'plugaddons'),
-                'style_transfer' => true,
-            ]
-        );
-
-        $repeater->add_control(
-            'color',
-            [
-                'label' => __('Text Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-skill-info' => 'color: {{VALUE}};',
-                ],
-                'condition' => ['customize' => 'yes'],
-                'style_transfer' => true,
-            ]
-        );
-
-        $repeater->add_control(
-            'level_color',
-            [
-                'label' => __('Level Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-skill-level' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-skill-level-text-five' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-skill-level-text-four:after' => 'border-color: transparent transparent transparent {{VALUE}};',
-                ],
-                'condition' => ['customize' => 'yes'],
-                'style_transfer' => true,
-            ]
-        );
-
-        $repeater->add_control(
-            'base_color',
-            [
-                'label' => __('Base Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}}.pla-skill' => 'background-color: {{VALUE}};',
-                ],
-                'condition' => ['customize' => 'yes'],
-                'style_transfer' => true,
-            ]
-        );
-
         $this->add_control(
             'testimonials',
             [
                 'show_label' => false,
-                'type' => Controls_Manager::REPEATER,
+                'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'title_field' => '<# print((testimonial_name) ? (testimonial_name) : "") #>',
                 'default' => [
@@ -292,14 +233,14 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             '_section_settings',
             [
                 'label' => __('Settings', 'plugaddons'),
-                'tab' => Controls_Manager::TAB_CONTENT,
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
         $this->add_control(
             'loop',
             [
                 'label' => __('Infinite Loop?', 'plugaddons'),
-                'type' => Controls_Manager::SWITCHER,
+                'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -311,7 +252,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'autoplay',
             [
                 'label' => __('Autoplay?', 'plugaddons'),
-                'type' => Controls_Manager::SWITCHER,
+                'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -324,7 +265,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'autoplay_speed',
             [
                 'label' => __('Autoplay Speed', 'plugaddons'),
-                'type' => Controls_Manager::NUMBER,
+                'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 100,
                 'step' => 100,
                 'max' => 10000,
@@ -341,7 +282,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'animation_speed',
             [
                 'label' => __('Animation Speed', 'plugaddons'),
-                'type' => Controls_Manager::NUMBER,
+                'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 100,
                 'step' => 10,
                 'max' => 10000,
@@ -356,7 +297,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'center',
             [
                 'label' => __('Center Mode?', 'plugaddons'),
-                'type' => Controls_Manager::SWITCHER,
+                'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -370,7 +311,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'navigation',
             [
                 'label' => __('Navigation', 'plugaddons'),
-                'type' => Controls_Manager::SELECT,
+                'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
                     'none' => __('None', 'plugaddons'),
                     'arrow' => __('Arrow', 'plugaddons'),
@@ -387,7 +328,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'slides_to_show',
             [
                 'label' => __('Slides To Show', 'plugaddons'),
-                'type' => Controls_Manager::SELECT,
+                'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
                     1 => __('1 Slide', 'plugaddons'),
                     2 => __('2 Slides', 'plugaddons'),
@@ -417,20 +358,78 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
      */
     protected function register_style_controls()
     {
-        $this->start_controls_section(
-            '_section_style_bars',
-            [
-                'label' => __('Testimonial Style', 'plugaddons'),
-                'tab' => Controls_Manager::TAB_STYLE,
-            ]
 
+        $this->start_controls_section(
+            'section_carousel_style',
+            [
+                'label' => __( 'Style', 'plugaddons' ),
+                'tab'   => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->start_controls_tabs( 'background_colors',
+            [
+                'label' => __('Inner Border Color', 'plugaddons'),
+            ]
+        );
+        $this->start_controls_tab(
+            'bg_colors_normal',
+            [
+                'label' => __( 'Normal', 'plugaddons' ),
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'background',
+                'label' => __( 'Background', 'plugin-domain' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner',
+            ]
+        );
+
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'bg_colors_hover',
+            [
+                'label' => __( 'Hover', 'plugaddons' ),
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'hvr-background',
+                'label' => __( 'Background', 'plugin-domain' ),
+                'types' => [ 'classic', 'gradient' ],
+                'selector' => '{{WRAPPER}} .testimonial-carousel.style-two .slick-current.slick-active .pla-testimonial-box-inner, {{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner:hover',
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->add_control(
+            'border_radius',
+            [
+                'label' => __('Border Radius', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'testimonial_box_shadow',
+                'selector' => '{{WRAPPER}} .pla-testimonial-box',
+            ]
         );
 
         $this->add_control(
             'inner_border',
             [
-                'label' => __('Box Inner Border Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
+                'label' => __('Inner Border Color', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
                 ],
@@ -438,7 +437,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
+            \Elementor\Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'inner_box_shadow',
                 'label' => __('Inner Box Shadow', 'plugaddons'),
@@ -447,34 +446,13 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
 
         );
 
-        $this->add_control(
-            'border_radius',
-            [
-                'label' => __('Border Radius', 'plugaddons'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'testimonial_box_shadow',
-                'selector' => '{{WRAPPER}} .pla-testimonial-box',
-            ]
-        );
-
         $this->end_controls_section();
 
         $this->start_controls_section(
-            '_section_content',
+            '_section_tes_content',
             [
                 'label' => __('Content', 'plugaddons'),
-                'tab' => Controls_Manager::TAB_STYLE,
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 
@@ -482,7 +460,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             'color',
             [
                 'label' => __('Text Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
+                'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box-inner p' => 'color: {{VALUE}};',
                 ],
@@ -490,22 +468,29 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_group_control(
-            Group_Control_Typography::get_type(),
+            \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'name_typography',
                 'label' => 'Name Typography',
-                'selector' => '{{WRAPPER}} .grid-name',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+                'selector' => '{{WRAPPER}} .pla-testimonial-box-inner p',
+                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
         $this->add_group_control(
-            Group_Control_Typography::get_type(),
+            \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'info_typography',
                 'selector' => '{{WRAPPER}} .pla-testimonial-box .grid-designation, {{WRAPPER}} .pla-testimonial-box p',
-                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
+
+        $this->end_controls_section();
+
+
+
+
+
 
 
     }
@@ -526,35 +511,53 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         $testimonials = $settings['testimonials'];
 
         ?>
-        <div class="testimonial-carousel <?php echo esc_attr($view);?>">
-            <?php foreach ($testimonials as $testimonial):
+        <div class="testimonial-carousel <?php echo esc_attr($view); ?>">
+            <?php foreach ($testimonials as $index => $testimonial):
                 $content = isset($testimonial['testimonial_content']) ? $testimonial['testimonial_content'] : '';
                 $name = isset($testimonial['testimonial_name']) ? $testimonial['testimonial_name'] : '';
                 $designation = isset($testimonial['testimonial_designation']) ? $testimonial['testimonial_designation'] : '';
                 $rating = $testimonial['testimonial_rating'];
                 $img = isset($testimonial['testimonial_image']) ? $testimonial['testimonial_image'] : array();
+
+                $name_inline_edit = $this->get_repeater_setting_key('testimonial_name', 'testimonials', $index);
+                $this->add_inline_editing_attributes($name_inline_edit, 'none');
+                $info_inline_edit = $this->get_repeater_setting_key('testimonial_content', 'testimonials', $index);
+                $this->add_inline_editing_attributes($info_inline_edit, 'none');
+                $this->add_render_attribute($info_inline_edit, [
+                    'class' => "carousel-name carousel-name--{$view}"
+                ]);
+                $name_inline_designation = $this->get_repeater_setting_key('testimonial_designation', 'testimonials', $index);
+                $this->add_inline_editing_attributes($name_inline_designation, 'none');
                 ?>
                 <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($view); ?>">
                     <div class="pla-testimonial-box-inner clearfix">
                         <div class="pla-testimonial">
-                            <p><?php echo wp_kses_post($content); ?></p>
-                            <?php if ($view == 'style-one'): ?>
+                            <?php if ($view == 'style-three' || $view == 'style-six'): ?>
+                                <div class="pla-author-img-wrap">
+                                    <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($view == 'style-four' || $view == 'style-six'): ?>
+                                <h6 <?php echo $this->get_render_attribute_string($name_inline_edit) ?>><?php echo esc_html($name); ?></h6>
+                                <span <?php echo $this->get_render_attribute_string($name_inline_designation) ?>><?php echo esc_html($designation); ?></span>
+                            <?php endif; ?>
+                            <p <?php echo $this->get_render_attribute_string($info_inline_edit) ?>><?php echo wp_kses_post($content); ?></p>
+                            <?php if ($view == 'style-one' || $view == 'style-three'): ?>
                                 <div class="ratings <?php echo esc_attr($rating); ?>"></div>
-                                <h6><?php echo esc_html($name); ?></h6>
-                                <span><?php echo esc_html($designation); ?></span>
+                                <h6 <?php echo $this->get_render_attribute_string($name_inline_edit) ?>><?php echo esc_html($name); ?></h6>
+                                <span <?php echo $this->get_render_attribute_string($name_inline_designation) ?>><?php echo esc_html($designation); ?></span>
                             <?php endif; ?>
                         </div>
-
                     </div>
-                    <?php if ($view != 'style-one'): ?>
-                        <div class="pla-author-img-wrap">
+                    <?php if ($view != 'style-one' && $view != 'style-three' && $view != 'style-four' && $view != 'style-six'): ?>
+                        <div class="pla-author-img-wrap pla-author-img-wrap-<?php echo esc_attr($view); ?>">
                             <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
                         </div>
-                    <div class="pla-testimonial--<?php echo esc_attr($view);?>">
+                        <div class="pla-testimonial--<?php echo esc_attr($view); ?>">
                             <div class="ratings <?php echo esc_attr($rating); ?>"></div>
-                            <h6><?php echo esc_html($name); ?></h6>
-                            <span><?php echo esc_html($designation); ?></span>
-                    </div>
+                            <h6 <?php echo $this->get_render_attribute_string($name_inline_edit) ?>><?php echo esc_html($name); ?></h6>
+                            <span <?php echo $this->get_render_attribute_string($name_inline_designation) ?>><?php echo esc_html($designation); ?></span>
+                        </div>
                     <?php endif; ?>
                     <div class="quote-one"></div>
                     <div class="quote-two"></div>
@@ -562,21 +565,6 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             <?php endforeach; ?>
         </div>
         <?php
-
-    }
-
-
-    /**
-     * Render Plugaddons widget output on the frontend.
-     *
-     * Written in JS and used to generate the final HTML.
-     *
-     * @since 1.0.0
-     * @access protected
-     */
-    protected function _content_template()
-    {
-
 
     }
 

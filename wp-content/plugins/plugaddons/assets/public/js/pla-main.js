@@ -31,17 +31,17 @@
                 this.run();
             },
 
-            isCarousel: function() {
-                return this.$element.hasClass('elementor-widget-testimonials-carousel');
-            },
+            // isCarousel: function() {
+            //     return this.$element.hasClass('elementor-widget-testimonials-carousel');
+            // },
             getDefaultSettings: function() {
                 return {
                     arrows: false,
                     dots: false,
-                    checkVisible: false,
+                    checkVisible: true,
                     infinite: true,
-                    slidesToShow: this.isCarousel() ? 3 : 1,
-                    rows: 0,
+                    slidesToShow: 3,
+                    centerMode: true,
                     prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left"></i></button>',
                     nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right"></i></button>',
                 }
@@ -57,7 +57,6 @@
                     autoplaySpeed: this.getElementSettings('autoplay_speed'),
                     speed: this.getElementSettings('animation_speed'),
                     centerMode: !! this.getElementSettings('center'),
-                    slidesToScroll: 4,
                 };
 
                 switch (this.getElementSettings('navigation')) {
@@ -73,7 +72,7 @@
                         break;
                 }
 
-                if (this.isCarousel()) {
+                // if (this.isCarousel()) {
                     settings.slidesToShow = this.getElementSettings('slides_to_show') || 3;
                     console.log(this.getElementSettings('slides_to_show'));
                     settings.responsive = [
@@ -90,7 +89,7 @@
                             }
                         }
                     ];
-                }
+                // }
 
                 return $.extend({}, this.getDefaultSettings(), settings);
             },

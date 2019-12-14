@@ -368,7 +368,8 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
         );
         $this->start_controls_tabs( 'background_colors',
             [
-                'label' => __('Inner Border Color', 'plugaddons'),
+                'label' => __('Background Color', 'plugaddons'),
+                'condition' => ['carousel_view!' => 'style-six'],
             ]
         );
         $this->start_controls_tab(
@@ -384,7 +385,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'name' => 'background',
                 'label' => __( 'Background', 'plugin-domain' ),
                 'types' => [ 'classic', 'gradient' ],
-                'selector' => '{{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner',
+                'selector' => '{{WRAPPER}} .testimonial-carousel.style-one .pla-testimonial-box,{{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner,{{WRAPPER}} .testimonial-carousel.style-three .pla-testimonial-box,{{WRAPPER}} .testimonial-carousel.style-four,{{WRAPPER}} .testimonial-carousel.style-five .pla-testimonial-box-inner',
             ]
         );
 
@@ -413,8 +414,9 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box,{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'condition' => ['carousel_view!' => array('style-six', 'style-four')],
             ]
         );
         $this->add_group_control(
@@ -422,32 +424,23 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             [
                 'name' => 'testimonial_box_shadow',
                 'selector' => '{{WRAPPER}} .pla-testimonial-box',
+                'condition' => ['carousel_view!' => array('style-six', 'style-four')],
             ]
         );
-
         $this->add_control(
             'inner_border',
             [
-                'label' => __('Inner Border Color', 'plugaddons'),
+                'label' => __('Border Color', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box:after,{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap:after' => 'border-right-color: {{VALUE}};',
                 ],
+                'condition' => ['carousel_view' => array('style-one', 'style-six')],
                 'style_transfer' => true,
             ]
         );
-        $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'inner_box_shadow',
-                'label' => __('Inner Box Shadow', 'plugaddons'),
-                'selector' => '{{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .pla-authoe-img-wrap img',
-            ]
-
-        );
-
         $this->end_controls_section();
-
         $this->start_controls_section(
             '_section_tes_content',
             [
@@ -455,24 +448,22 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
-
         $this->add_control(
             'color',
             [
                 'label' => __('Text Color', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box-inner p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box-inner p,{{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two span' => 'color: {{VALUE}};',
                 ],
             ]
         );
-
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'name_typography',
                 'label' => 'Name Typography',
-                'selector' => '{{WRAPPER}} .pla-testimonial-box-inner p',
+                'selector' => '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box h6',
                 'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
@@ -484,9 +475,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
-
         $this->end_controls_section();
-
     }
 
     /**
@@ -526,7 +515,7 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 <div class="pla-testimonial-box pla-testimonial--<?php echo esc_attr($view); ?>">
                     <div class="pla-testimonial-box-inner clearfix">
                         <div class="pla-testimonial">
-                            <?php if ($view == 'style-three' || $view == 'style-six'): ?>
+                            <?php if ($view == 'style-three' || ($view == 'style-six' && $img['id'] != '')): ?>
                                 <div class="pla-author-img-wrap">
                                     <?php echo wp_get_attachment_image($img['id'], 'thumbnail'); ?>
                                 </div>
@@ -559,7 +548,6 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
             <?php endforeach; ?>
         </div>
         <?php
-
     }
 
 }

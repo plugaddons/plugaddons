@@ -41,7 +41,8 @@
                     checkVisible: true,
                     infinite: true,
                     slidesToShow: 3,
-                    centerMode: true,
+                    centerMode: false,
+                    fade: false,
                     prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-chevron-left"></i></button>',
                     nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right"></i></button>',
                 }
@@ -57,6 +58,7 @@
                     autoplaySpeed: this.getElementSettings('autoplay_speed'),
                     speed: this.getElementSettings('animation_speed'),
                     centerMode: !! this.getElementSettings('center'),
+                    fade: !! this.getElementSettings('animation_fade'),
                 };
 
                 switch (this.getElementSettings('navigation')) {

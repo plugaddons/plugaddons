@@ -306,6 +306,19 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'style_transfer' => true,
             ]
         );
+        $this->add_control(
+            'animation_fade',
+            [
+                'label' => __('Fade?', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'plugaddons'),
+                'label_off' => __('No', 'plugaddons'),
+                'return_value' => 'yes',
+                'description' => __('Best works with odd number of slides (Slides To Show) and loop (Infinite Loop)', 'plugaddons'),
+                'frontend_available' => true,
+                'style_transfer' => true,
+            ]
+        );
 
         $this->add_control(
             'navigation',
@@ -337,9 +350,9 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                     5 => __('5 Slides', 'plugaddons'),
                     6 => __('6 Slides', 'plugaddons'),
                 ],
-                'desktop_default' => 4,
-                'tablet_default' => 3,
-                'mobile_default' => 2,
+                'desktop_default' => 3,
+                'tablet_default' => 2,
+                'mobile_default' => 1,
                 'frontend_available' => true,
                 'style_transfer' => true,
             ]
@@ -440,6 +453,18 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'style_transfer' => true,
             ]
         );
+        $this->add_control(
+            'image_bg',
+            [
+                'label' => __('Image Background Color', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-three .pla-author-img-wrap:after' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['carousel_view' => array('style-three')],
+                'style_transfer' => true,
+            ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
             '_section_tes_content',
@@ -455,6 +480,16 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box-inner p,{{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two span' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'name_color',
+            [
+                'label' => __('Name Color', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box h6,{{WRAPPER}} .testimonial-carousel .pla-testimonial-box span' => 'color: {{VALUE}};',
                 ],
             ]
         );

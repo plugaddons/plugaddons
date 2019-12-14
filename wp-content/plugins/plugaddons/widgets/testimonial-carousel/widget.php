@@ -211,18 +211,33 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'default' => [
                     [
                         'testimonial_name' => 'SHEHAB KHAN',
+                        'testimonial_image' => [
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                        ],
                     ],
                     [
                         'testimonial_name' => 'SHARIAR HOSSAIN',
+                        'testimonial_image' => [
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                        ],
                     ],
                     [
                         'testimonial_name' => 'SHOHEL KHAN',
+                        'testimonial_image' => [
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                        ],
                     ],
                     [
                         'testimonial_name' => 'AL SHAHRIAR',
+                        'testimonial_image' => [
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                        ],
                     ],
                     [
                         'testimonial_name' => 'ABDULL AL AHAD',
+                        'testimonial_image' => [
+                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                        ],
                     ]
                 ]
             ]
@@ -446,10 +461,10 @@ class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
                 'label' => __('Border Color', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-testimonial-box:after,{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-testimonial-box:after,{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img, {{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-author-img-wrap' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap:after' => 'border-right-color: {{VALUE}};',
                 ],
-                'condition' => ['carousel_view' => array('style-one', 'style-six')],
+                'condition' => ['carousel_view' => array('style-one','style-two', 'style-six')],
                 'style_transfer' => true,
             ]
         );

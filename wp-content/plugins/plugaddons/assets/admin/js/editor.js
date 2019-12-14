@@ -13,7 +13,7 @@
         });
     }
 
-    elementor.hooks.addAction( "panel/open_editor/widget/testimonialsCarouselWidget", function( panel, model, view ) {
+    elementor.hooks.addAction( "panel/open_editor/widget/testimonials-carousel", function( panel, model, view ) {
 
         var $selector = $("input:hidden[value='style_select_hidden']").parents('.elementor-control').prev().find('select');
         $selector.on('change', function(){

@@ -8,7 +8,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 
-class Plugaddons_Progressbar_Widget extends \Elementor\Widget_Base
+class Plugaddons_Progressbar extends \Elementor\Widget_Base
 {
 
     /**

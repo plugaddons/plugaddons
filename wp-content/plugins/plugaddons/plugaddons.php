@@ -266,9 +266,9 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/testimonial-carousel/widget.php');
 
 		// Register widget
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar_Widget() );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Widget() );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel_Widget() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Grid() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel() );
 
 	}
 

@@ -3,7 +3,7 @@
 
 use Elementor\Controls_Manager;
 
-class Plugaddons_Testimonials_carousel_Widget extends \Elementor\Widget_Base
+class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
 {
 
     /**

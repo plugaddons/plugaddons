@@ -8,7 +8,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 
-class Plugaddons_Testimonials_Widget extends \Elementor\Widget_Base
+class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
 {
 
     /**

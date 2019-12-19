@@ -1,7 +1,15 @@
-
-
 (function ($) {
     $(window).on('elementor/frontend/init', function () {
+
+
+        elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
+            $scope.find('.accordion').each(function () {
+                var $current = $(this);
+                $current.accordiom();
+            });
+        });
+
+
 
         elementorFrontend.hooks.addAction('frontend/element_ready/progressbar_widget.default', function ($scope) {
             elementorFrontend.waypoint($scope, function () {
@@ -34,7 +42,7 @@
             // isCarousel: function() {
             //     return this.$element.hasClass('elementor-widget-testimonials-carousel');
             // },
-            getDefaultSettings: function() {
+            getDefaultSettings: function () {
                 return {
                     arrows: false,
                     dots: false,
@@ -47,18 +55,18 @@
                     nextArrow: '<button type="button" class="slick-next"><i class="fa fa-chevron-right"></i></button>',
                 }
             },
-            onElementChange: function() {
+            onElementChange: function () {
                 this.$container.slick('unslick');
                 this.run();
             },
-            getReadySettings: function() {
+            getReadySettings: function () {
                 var settings = {
-                    infinite: !! this.getElementSettings('loop'),
-                    autoplay: !! this.getElementSettings('autoplay'),
+                    infinite: !!this.getElementSettings('loop'),
+                    autoplay: !!this.getElementSettings('autoplay'),
                     autoplaySpeed: this.getElementSettings('autoplay_speed'),
                     speed: this.getElementSettings('animation_speed'),
-                    centerMode: !! this.getElementSettings('center'),
-                    fade: !! this.getElementSettings('animation_fade'),
+                    centerMode: !!this.getElementSettings('center'),
+                    fade: !!this.getElementSettings('animation_fade'),
                 };
 
                 switch (this.getElementSettings('navigation')) {
@@ -75,27 +83,27 @@
                 }
 
                 // if (this.isCarousel()) {
-                    settings.slidesToShow = this.getElementSettings('slides_to_show') || 3;
-                    console.log(this.getElementSettings('slides_to_show'));
-                    settings.responsive = [
-                        {
-                            breakpoint: elementorFrontend.config.breakpoints.lg,
-                            settings: {
-                                slidesToShow: (this.getElementSettings('slides_to_show_tablet') || settings.slidesToShow),
-                            }
-                        },
-                        {
-                            breakpoint: elementorFrontend.config.breakpoints.md,
-                            settings: {
-                                slidesToShow: (this.getElementSettings('slides_to_show_mobile') || this.getElementSettings('slides_to_show_tablet')) || settings.slidesToShow,
-                            }
+                settings.slidesToShow = this.getElementSettings('slides_to_show') || 3;
+                console.log(this.getElementSettings('slides_to_show'));
+                settings.responsive = [
+                    {
+                        breakpoint: elementorFrontend.config.breakpoints.lg,
+                        settings: {
+                            slidesToShow: (this.getElementSettings('slides_to_show_tablet') || settings.slidesToShow),
                         }
-                    ];
+                    },
+                    {
+                        breakpoint: elementorFrontend.config.breakpoints.md,
+                        settings: {
+                            slidesToShow: (this.getElementSettings('slides_to_show_mobile') || this.getElementSettings('slides_to_show_tablet')) || settings.slidesToShow,
+                        }
+                    }
+                ];
                 // }
 
                 return $.extend({}, this.getDefaultSettings(), settings);
             },
-            run: function() {
+            run: function () {
                 this.$container.slick(this.getReadySettings());
             }
 
@@ -104,12 +112,15 @@
         var handlersClassInit = {
             'testimonials-carousel.default': testimonialCarousel,
         };
-        $.each( handlersClassInit, function( widgetName, handlerClass ) {
-            elementorFrontend.hooks.addAction( 'frontend/element_ready/' + widgetName, function( $scope ) {
-                elementorFrontend.elementsHandler.addHandler( handlerClass, { $element: $scope });
+        $.each(handlersClassInit, function (widgetName, handlerClass) {
+            elementorFrontend.hooks.addAction('frontend/element_ready/' + widgetName, function ($scope) {
+                elementorFrontend.elementsHandler.addHandler(handlerClass, {$element: $scope});
             });
         });
     });
+
+
+
 })(jQuery);
 
 

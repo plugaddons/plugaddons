@@ -159,6 +159,7 @@ final class Elementor_Plugaddons_Extension {
 	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
 	    wp_enqueue_script('slick-js', plugin_dir_url( __FILE__ ).'/assets/public/js/slick.min.js', array('jquery'), '1.0.0', true);
+	    wp_enqueue_script('pla-accordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/accordiom.min.js', array('jquery','jquery-numerator-js'), time(), true);
 	    wp_enqueue_script('pla-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/pla-main.js', array('jquery','jquery-numerator-js'), time(), true);
 
 	}
@@ -264,11 +265,13 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/progressbar/widget.php');
 		require_once(__DIR__ . '/widgets/testimonial-grid/widget.php');
 		require_once(__DIR__ . '/widgets/testimonial-carousel/widget.php');
+		require_once(__DIR__ . '/widgets/accordion/widget.php');
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Grid() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Accordion() );
 
 	}
 

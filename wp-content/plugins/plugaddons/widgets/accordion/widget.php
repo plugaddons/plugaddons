@@ -549,18 +549,18 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         <div class="accordion">
             <?php
             foreach ($settings['accordions'] as $index => $accordion) :
-            $name_key = $this->get_repeater_setting_key('name', 'bars', $index);
-            $this->add_inline_editing_attributes($name_key, 'none');
-            ?>
-<!--            <div class="single-accordion">-->
-                <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index + 1); ?> elementor-repeater-item-<?php echo $accordion['_id']; ?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']); ?>">
-                    <?php if ($settings['show_number'] == 'yes'): ?>
-                        <span class="pla-accordion-number"><?php echo esc_html($index + 1); ?></span>
-                    <?php endif; ?>
-                    <h5><?php echo esc_html($accordion['name']); ?></h5>
-                    <?php if ($has_icon) : ?>
-                        <span class="pla-accordion-icon pla-accordion-icon-<?php echo esc_attr($settings['icon_align']); ?>"
-                              aria-hidden="true">
+                $name_key = $this->get_repeater_setting_key('name', 'bars', $index);
+                $this->add_inline_editing_attributes($name_key, 'none');
+                ?>
+                <div class="single-accordion elementor-repeater-item-<?php echo $accordion['_id']; ?>">
+                    <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index + 1); ?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']); ?> elementor-repeater-item-<?php echo $accordion['_id']; ?>">
+                        <?php if ($settings['show_number'] == 'yes'): ?>
+                            <span class="pla-accordion-number"><?php echo esc_html($index + 1); ?></span>
+                        <?php endif; ?>
+                        <h5><?php echo esc_html($accordion['name']); ?></h5>
+                        <?php if ($has_icon) : ?>
+                            <span class="pla-accordion-icon pla-accordion-icon-<?php echo esc_attr($settings['icon_align']); ?>"
+                                  aria-hidden="true">
                         <?php
                         if ($is_new || $migrated) { ?>
                             <span class="pla-accordion-icon-closed"><?php Icons_Manager::render_icon($settings['selected_icon']); ?></span>
@@ -570,18 +570,18 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                             <i class="pla-accordion-icon-opened <?php echo esc_attr($settings['icon_active']); ?>"></i>
                         <?php } ?>
                     </span>
-                    <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="pla-accordion-content">
+                        <?php echo wp_kses_post($accordion['description']) ?>
+                    </div>
                 </div>
-                <div class="pla-accordion-content">
-                    <?php echo wp_kses_post($accordion['description']) ?>
-                </div>
+            <?php
+            endforeach;
+            ?>
 
-                <?php
-                endforeach;
-                ?>
 
-            </div>
-<!--        </div>-->
+        </div>
 
         <?php
     }

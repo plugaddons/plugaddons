@@ -1,38 +1,31 @@
-(function ($) {
+(function ($, window, document) {
+
+        "use strict";
+
+
+
+
+
+
     $(window).on('elementor/frontend/init', function () {
 
+        // Accordion JS
 
         elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
             $scope.find('.accordion').each(function () {
-                var $current = $(this);
-                $current.accordiom();
+                $(document).on('click', '.single-accordion > .pla-accordion-title', function () {
+                    let thisTitle = $(this),
+                        thisItem = $(this).parent(),
+                        allItems = thisItem.parent(),
+                        thisContent = thisItem.find('.pla-accordion-content');
+                    if (!thisItem.hasClass('active')) {
+                        allItems.find('.single-accordion').removeClass('active').find('.pla-accordion-content').slideUp();
+                        thisContent.slideToggle();
+                        thisItem.toggleClass('active');
+                    }
+                });
             });
         });
-
-
-
-        // elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
-        //     $scope.find('.accordion').each(function () {
-        //         // $('.pla-accordion-content').hide();
-        //         // $('.pla-accordion-content').first().show();
-        //         // $('.pla-accordion-title').click(function (e) {
-        //         //     e.preventDefault();
-        //         //     $('.active').removeClass('active');
-        //         //     $(this).addClass('active');
-        //         //
-        //         //     $('.pla-accordion-content').slideUp();
-        //         //     $(this).next().slideDown();
-        //         // });
-        //
-        //
-        //         $(".pla-accordion-title").click(function() {
-        //             $(".pla-accordion-title").removeClass("active");
-        //             $(this).toggleClass("active");
-        //         });
-        //     });
-        // });
-
-
 
         elementorFrontend.hooks.addAction('frontend/element_ready/progressbar_widget.default', function ($scope) {
             elementorFrontend.waypoint($scope, function () {
@@ -143,8 +136,7 @@
     });
 
 
-
-})(jQuery);
+})(jQuery, window, document);
 
 
 

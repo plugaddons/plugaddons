@@ -11,6 +11,29 @@
 
 
 
+        // elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
+        //     $scope.find('.accordion').each(function () {
+        //         // $('.pla-accordion-content').hide();
+        //         // $('.pla-accordion-content').first().show();
+        //         // $('.pla-accordion-title').click(function (e) {
+        //         //     e.preventDefault();
+        //         //     $('.active').removeClass('active');
+        //         //     $(this).addClass('active');
+        //         //
+        //         //     $('.pla-accordion-content').slideUp();
+        //         //     $(this).next().slideDown();
+        //         // });
+        //
+        //
+        //         $(".pla-accordion-title").click(function() {
+        //             $(".pla-accordion-title").removeClass("active");
+        //             $(this).toggleClass("active");
+        //         });
+        //     });
+        // });
+
+
+
         elementorFrontend.hooks.addAction('frontend/element_ready/progressbar_widget.default', function ($scope) {
             elementorFrontend.waypoint($scope, function () {
                 $scope.find('.pla-skill-level').each(function () {

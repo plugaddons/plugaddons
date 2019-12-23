@@ -120,6 +120,31 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             ]
         );
         $repeater->add_control(
+            'customize',
+            [
+                'label' => __('Want To Customize?', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'plugaddons'),
+                'label_off' => __('No', 'plugaddons'),
+                'return_value' => 'yes',
+                'description' => __('You can customize this skill bar color from here or customize from Style tab', 'plugaddons'),
+                'style_transfer' => true,
+            ]
+        );
+
+        $repeater->add_control(
+            'title_color',
+            [
+                'label' => __('Text Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-title' => 'color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
+            ]
+        );
+        $repeater->add_control(
             'description',
             [
                 'type' => Controls_Manager::WYSIWYG,
@@ -264,7 +289,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                         'icon' => 'fa fa-align-right',
                     ],
                 ],
-                'default' => 'center',
+                'default' => 'right',
                 'toggle' => false,
                 'condition' => ['selected_icon[value]!' => '',]
             ]
@@ -300,8 +325,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'background',
-                'label' => __( 'Background', 'plugin-domain' ),
-                'types' => [ 'classic', 'gradient', 'video' ],
+                'label' => __('Background', 'plugin-domain'),
+                'types' => ['classic', 'gradient', 'video'],
                 'selector' => '{{WRAPPER}} .accordion',
             ]
         );
@@ -317,12 +342,12 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                         'max' => 250,
                     ],
                 ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 52,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill--style-two' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-one' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-three' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-four' => 'height: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-five' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-accordion-title' => 'height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -339,12 +364,13 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                         'max' => 250,
                     ],
                 ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 15,
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill--style-two' => 'margin-top: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-one:not(:first-child)' => 'margin-top: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-three' => 'margin-top: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-four' => 'margin-top: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .pla-skill--style-five' => 'margin-top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-accordion-title' => 'margin-top: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-accordion-title:not(:first-child)' => 'margin-top: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -356,7 +382,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill, {{WRAPPER}} .pla-skill-level' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-accordion-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -373,6 +399,80 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+        $this->start_controls_section(
+            '_section_title',
+            [
+                'label' => __('Title', 'plugaddons'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'title_bg',
+            [
+                'label' => __('Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .pla-accordion-title' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'title_active_bg',
+            [
+                'label' => __('Background Active Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .pla-accordion-title.on' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'title_border',
+            [
+                'label' => __('Border Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .pla-accordion-title' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'title_color',
+            [
+                'label' => __('Text Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .pla-accordion-title' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .pla-accordion-title h5',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'title_text_shadow',
+                'selector' => '{{WRAPPER}} .pla-accordion-title h5',
+            ]
+        );
+        $this->add_control(
+            'number_color',
+            [
+                'label' => __('Number Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .pla-accordion-number' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['show_number' => 'yes']
+            ]
+        );
+        $this->end_controls_section();
 
         $this->start_controls_section(
             '_section_content',
@@ -381,46 +481,31 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-
         $this->add_control(
             'color',
             [
                 'label' => __('Text Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-skill-info' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-accordion-content' => 'color: {{VALUE}};',
                 ],
             ]
         );
-
-        $this->add_control(
-            'level_color',
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
             [
-                'label' => __('Level Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .pla-skill-level' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .pla-skill-level-text-five' => 'background-color: {{VALUE}};',
-                    '{{WRAPPER}} .pla-skill-level-text-four:after' => 'border-color: transparent transparent transparent {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'base_color',
-            [
-                'label' => __('Base Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .pla-skill' => 'background-color: {{VALUE}};',
-                ],
+                'name' => 'content_background',
+                'label' => __('Background', 'plugin-domain'),
+                'types' => ['classic', 'gradient', 'video'],
+                'selector' => '{{WRAPPER}} .pla-accordion-content',
             ]
         );
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'info_typography',
-                'selector' => '{{WRAPPER}} .pla-skill-info',
+                'name' => 'content_typography',
+                'selector' => '{{WRAPPER}} .pla-accordion-content',
                 'scheme' => Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
@@ -428,10 +513,11 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
-                'name' => 'info_text_shadow',
-                'selector' => '{{WRAPPER}} .pla-skill-info',
+                'name' => 'content_text_shadow',
+                'selector' => '{{WRAPPER}} .pla-accordion-content',
             ]
         );
+        $this->end_controls_section();
     }
 
     /**
@@ -446,54 +532,56 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $migrated = isset( $settings['__fa4_migrated']['selected_icon'] );
-        if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
+        $migrated = isset($settings['__fa4_migrated']['selected_icon']);
+        if (!isset($settings['icon']) && !Icons_Manager::is_migration_allowed()) {
             $settings['icon'] = 'fa fa-plus';
             $settings['icon_active'] = 'fa fa-minus';
-            $settings['icon_align'] = $this->get_settings( 'icon_align' );
+            $settings['icon_align'] = $this->get_settings('icon_align');
         }
 
-        $is_new = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
-        $has_icon = ( ! $is_new || ! empty( $settings['selected_icon']['value'] ) );
+        $is_new = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
+        $has_icon = (!$is_new || !empty($settings['selected_icon']['value']));
         if (!is_array($settings['accordions'])) {
             return;
         }
         ?>
 
         <div class="accordion">
-        <?php
-        foreach ($settings['accordions'] as $index => $accordion) :
+            <?php
+            foreach ($settings['accordions'] as $index => $accordion) :
             $name_key = $this->get_repeater_setting_key('name', 'bars', $index);
             $this->add_inline_editing_attributes($name_key, 'none');
-            $this->add_render_attribute($name_key, 'class', 'pla-skill-name');
             ?>
-            <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index+1);?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']);?>">
-                <?php if ($settings['show_number'] == 'yes'):?>
-                <span class="pla-accordion-number"><?php echo esc_html($index+1);?></span>
-                <?php endif;?>
-                <h5><?php echo esc_html($accordion['name']);?></h5>
-                <?php if ( $has_icon ) : ?>
-                    <span class="pla-accordion-icon pla-accordion-icon-<?php echo esc_attr( $settings['icon_align'] ); ?>" aria-hidden="true">
+<!--            <div class="single-accordion">-->
+                <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index + 1); ?> elementor-repeater-item-<?php echo $accordion['_id']; ?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']); ?>">
+                    <?php if ($settings['show_number'] == 'yes'): ?>
+                        <span class="pla-accordion-number"><?php echo esc_html($index + 1); ?></span>
+                    <?php endif; ?>
+                    <h5><?php echo esc_html($accordion['name']); ?></h5>
+                    <?php if ($has_icon) : ?>
+                        <span class="pla-accordion-icon pla-accordion-icon-<?php echo esc_attr($settings['icon_align']); ?>"
+                              aria-hidden="true">
                         <?php
-                        if ( $is_new || $migrated ) { ?>
-                            <span class="pla-accordion-icon-closed"><?php Icons_Manager::render_icon( $settings['selected_icon'] ); ?></span>
-                            <span class="pla-accordion-icon-opened"><?php Icons_Manager::render_icon( $settings['selected_active_icon'] ); ?></span>
+                        if ($is_new || $migrated) { ?>
+                            <span class="pla-accordion-icon-closed"><?php Icons_Manager::render_icon($settings['selected_icon']); ?></span>
+                            <span class="pla-accordion-icon-opened"><?php Icons_Manager::render_icon($settings['selected_active_icon']); ?></span>
                         <?php } else { ?>
-                            <i class="pla-accordion-icon-closed <?php echo esc_attr( $settings['icon'] ); ?>"></i>
-                            <i class="pla-accordion-icon-opened <?php echo esc_attr( $settings['icon_active'] ); ?>"></i>
+                            <i class="pla-accordion-icon-closed <?php echo esc_attr($settings['icon']); ?>"></i>
+                            <i class="pla-accordion-icon-opened <?php echo esc_attr($settings['icon_active']); ?>"></i>
                         <?php } ?>
                     </span>
-                <?php endif; ?>
-            </div>
-            <div class="pla-accordion-content">
-                <?php echo wp_kses_post($accordion['description'])?>
-            </div>
+                    <?php endif; ?>
+                </div>
+                <div class="pla-accordion-content">
+                    <?php echo wp_kses_post($accordion['description']) ?>
+                </div>
 
-        <?php
-        endforeach;
-        ?>
+                <?php
+                endforeach;
+                ?>
 
-        </div>
+            </div>
+<!--        </div>-->
 
         <?php
     }

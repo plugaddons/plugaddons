@@ -156,10 +156,15 @@ final class Elementor_Plugaddons_Extension {
 	public function pla_assets_files(){
 	    wp_enqueue_style('slick-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick.css', null, '1.0.0', 'all');
 	    wp_enqueue_style('slick-theme-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick-theme.css', null, '1.0.0', 'all');
+	    //wp_enqueue_style('msAccordion-css', plugin_dir_url( __FILE__ ). '/assets/public/css/accordion.css', null, '1.0.0', 'all');
+	   // wp_enqueue_style('asAccordion-css', plugin_dir_url( __FILE__ ). '/assets/public/css/asAccordion.css', null, '1.0.0', 'all');
 	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
 	    wp_enqueue_script('slick-js', plugin_dir_url( __FILE__ ).'/assets/public/js/slick.min.js', array('jquery'), '1.0.0', true);
-	    wp_enqueue_script('pla-accordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/accordiom.min.js', array('jquery','jquery-numerator-js'), time(), true);
+	   // wp_enqueue_script('pla-msAccordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery.msAccordion.js', array('jquery','jquery-numerator-js'), time(), true);
+	    //wp_enqueue_script('pla-asAccordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/asAccordion.js', array('jquery','jquery-numerator-js'), time(), true);
+	    //wp_enqueue_script('cm.accordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery.cm.accordion.min.js', array('jquery','jquery-numerator-js'), time(), true);
+	    wp_enqueue_script('accordiom-js', plugin_dir_url( __FILE__ ).'/assets/public/js/accordiom.min.js', array('jquery','jquery-numerator-js'), time(), true);
 	    wp_enqueue_script('pla-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/pla-main.js', array('jquery','jquery-numerator-js'), time(), true);
 
 	}
@@ -272,6 +277,7 @@ final class Elementor_Plugaddons_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Grid() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Accordion() );
+
 
 	}
 

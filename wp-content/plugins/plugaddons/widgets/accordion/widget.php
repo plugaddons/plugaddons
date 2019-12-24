@@ -120,6 +120,16 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             ]
         );
         $repeater->add_control(
+            'description',
+            [
+                'type' => Controls_Manager::WYSIWYG,
+                'label' => __('Description', 'plugaddons'),
+                'label_block' => true,
+                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.', 'plugaddons'),
+                'placeholder' => __('Type a Accordion name', 'plugaddons'),
+            ]
+        );
+        $repeater->add_control(
             'customize',
             [
                 'label' => __('Want To Customize?', 'plugaddons'),
@@ -127,11 +137,55 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
-                'description' => __('You can customize this skill bar color from here or customize from Style tab', 'plugaddons'),
+                'description' => __('You can customize this Accordion color from here or customize from Style tab', 'plugaddons'),
                 'style_transfer' => true,
             ]
         );
-
+        $repeater->add_control(
+            'title_options',
+            [
+                'label' => __( 'Title Options', 'plugaddons' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => ['customize' => 'yes'],
+            ]
+        );
+        $repeater->add_control(
+            'title_bg',
+            [
+                'label' => __('Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-title' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
+            ]
+        );
+        $repeater->add_control(
+            'title_active_bg',
+            [
+                'label' => __('Background Active Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .single-accordion.active .pla-accordion-title' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
+            ]
+        );
+        $repeater->add_control(
+            'title_border',
+            [
+                'label' => __('Border Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-title' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
+            ]
+        );
         $repeater->add_control(
             'title_color',
             [
@@ -145,13 +199,46 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             ]
         );
         $repeater->add_control(
-            'description',
+            'number_bg',
             [
-                'type' => Controls_Manager::WYSIWYG,
-                'label' => __('Description', 'plugaddons'),
-                'label_block' => true,
-                'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut.', 'plugaddons'),
-                'placeholder' => __('Type a Accordion name', 'plugaddons'),
+                'label' => __('Number Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-number' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
+            ]
+        );
+        $repeater->add_control(
+            'content_options',
+            [
+                'label' => __( 'Content Options', 'plugaddons' ),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => ['customize' => 'yes'],
+            ]
+        );
+        $repeater->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'background',
+                'label' => __( 'Background', 'plugaddons' ),
+                'types' => [ 'classic', 'gradient', 'video' ],
+                'selector' => '{{WRAPPER}} .pla-accordion-content',
+                'condition' => ['customize' => 'yes'],
+            ]
+        );
+        $repeater->add_control(
+            'content_color',
+            [
+                'label' => __('Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-content' => 'color: {{VALUE}};',
+                ],
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
 
@@ -179,6 +266,17 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                         'name' => 'Plugaddons Feture!'
                     ]
                 ]
+            ]
+        );
+        $this->add_control(
+            'accordion_horizontal',
+            [
+                'label' => __('Horizontal Accordion', 'plugaddons'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'plugaddons'),
+                'label_off' => __('Hide', 'plugaddons'),
+                'return_value' => 'yes',
+                'default' => 'no',
             ]
         );
         $this->add_control(
@@ -546,14 +644,14 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         }
         ?>
 
-        <div class="accordion">
+        <div class="accordion <?php echo esc_attr(($settings['accordion_horizontal']== 'yes') ? 'accordion-horizontal' : '');?>">
             <?php
             foreach ($settings['accordions'] as $index => $accordion) :
                 $name_key = $this->get_repeater_setting_key('name', 'bars', $index);
                 $this->add_inline_editing_attributes($name_key, 'none');
                 ?>
-                <div class="single-accordion elementor-repeater-item-<?php echo $accordion['_id']; ?>">
-                    <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index + 1); ?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']); ?> elementor-repeater-item-<?php echo $accordion['_id']; ?>">
+                <div class="single-accordion elementor-repeater-item-<?php echo $accordion['_id']; ?> <?php echo ($index+1==1) ? 'active' : '';?>">
+                    <div class="pla-accordion-title pla-accordion-title--<?php echo esc_attr($index + 1); ?> pla-accordion-title-number--<?php echo esc_attr($settings['number_align']); ?>">
                         <?php if ($settings['show_number'] == 'yes'): ?>
                             <span class="pla-accordion-number"><?php echo esc_html($index + 1); ?></span>
                         <?php endif; ?>

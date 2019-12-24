@@ -1240,7 +1240,7 @@ Testimonial Carousel
 }
 
 .pla-accordion-content {
-    padding: 1.5rem 1.5rem 0;
+    padding: 24px;
     font-size: 1.25rem;
     line-height: 1.6;
 }
@@ -1253,6 +1253,7 @@ Testimonial Carousel
     border-bottom: 1px solid #DE4D65;
     margin-top: 15px;
     position: relative;
+    overflow: hidden;
 }
 .pla-accordion-title.pla-accordion-title--1 {
     margin-top: 0 !important;
@@ -1274,16 +1275,16 @@ Testimonial Carousel
     float: left;
     text-align: left;
 }
-.pla-accordion-title.on .pla-accordion-icon-closed {
+.single-accordion.active .pla-accordion-title .pla-accordion-icon-closed {
     display: none;
 }
-.pla-accordion-title.on .pla-accordion-icon-opened {
+.single-accordion.active .pla-accordion-title .pla-accordion-icon-opened {
     display: block;
 }
-.pla-accordion-title .pla-accordion-icon-opened {
+.single-accordion .pla-accordion-title .pla-accordion-icon-opened {
     display: none;
 }
-.pla-accordion-title .pla-accordion-icon-closed {
+.single-accordion .pla-accordion-title .pla-accordion-icon-closed {
     display: block;
 }
 .accordion .pla-accordion-title .pla-accordion-icon {
@@ -1318,10 +1319,15 @@ Testimonial Carousel
 .pla-accordion-title.pla-accordion-title-number--left h5 {
     margin-left: 45px;
 }
-
-
 .pla-accordion-content{
     display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+.single-accordion.active .pla-accordion-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 
@@ -1334,4 +1340,39 @@ Testimonial Carousel
 
 
 
+.accordion.accordion-horizontal {
+    display: flex;
+    min-height: 100%;
+    max-height: 100%;
+}
 
+.accordion-horizontal .single-accordion {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+.accordion-horizontal .single-accordion.active {
+    flex: 5;
+}
+
+
+.accordion-horizontal .single-accordion.active .pla-accordion-title {
+    flex: 4;
+    transform: scaleX(1);
+}
+
+.accordion-horizontal .single-accordion .pla-accordion-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.accordion-horizontal .single-accordion .pla-accordion-title h5 {
+    transform: rotate(-90deg);
+}
+
+.accordion-horizontal .single-accordion .pla-accordion-content {
+    flex: 1;
+    display: flex;
+}

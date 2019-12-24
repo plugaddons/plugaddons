@@ -1,12 +1,5 @@
 (function ($, window, document) {
-
-        "use strict";
-
-
-
-
-
-
+    "use strict";
     $(window).on('elementor/frontend/init', function () {
 
         // Accordion JS
@@ -14,14 +7,14 @@
         elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
             $scope.find('.accordion').each(function () {
                 $(document).on('click', '.single-accordion > .pla-accordion-title', function () {
-                    let thisTitle = $(this),
-                        thisItem = $(this).parent(),
-                        allItems = thisItem.parent(),
-                        thisContent = thisItem.find('.pla-accordion-content');
-                    if (!thisItem.hasClass('active')) {
-                        allItems.find('.single-accordion').removeClass('active').find('.pla-accordion-content').slideUp();
-                        thisContent.slideToggle();
-                        thisItem.toggleClass('active');
+                    var $thisTitle = $(this),
+                        $thisItem = $thisTitle.parent(),
+                        $allItems = $thisItem.parent(),
+                        $thisContent = $thisItem.find('.pla-accordion-content');
+                    if (!$thisItem.hasClass('active')) {
+                        $allItems.find('.single-accordion').removeClass('active').find('.pla-accordion-content').slideUp();
+                        $thisContent.slideToggle();
+                        $thisItem.toggleClass('active');
                     }
                 });
             });

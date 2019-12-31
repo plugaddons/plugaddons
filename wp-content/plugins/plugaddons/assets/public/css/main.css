@@ -1329,3 +1329,80 @@ Testimonial Carousel
     opacity: 1;
     visibility: visible;
 }
+
+
+
+
+/*Team CSS*/
+.pla-team-box{
+    overflow: hidden;
+}
+.pla-team-box.pla-team-grid--style-one {
+    box-shadow: 0 1px 4px 0 rgba(9,30,66,.15);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(0);
+    overflow: hidden;
+}
+.pla-team-box.pla-team-grid--style-one:hover {
+    box-shadow: 0 8px 20px -7px rgba(9,30,66,.3);
+    transform: translateY(-4px);
+}
+.pla-team-area .row:last-child .pla-team-grid--style-one {
+    margin-bottom: 0;
+}
+/*.pla-team-box.pla-team-grid--style-one .pla-team-header {*/
+/*    height: 121px;*/
+/*    position: relative;*/
+/*}*/
+/*.pla-team-box.pla-team-grid--style-one .pla-team-header img {*/
+/*    position: absolute;*/
+/*    bottom: -37px;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    width: 75px;*/
+/*    height: 75px;*/
+/*    border-radius: 50%;*/
+/*    border:3px solid #FFFFFF;*/
+/*}*/
+
+.pla-team-box.pla-team-grid--style-one .pla-team-desc {
+    padding: 55px 14px 22px;
+}
+.pla-team-box.pla-team-grid--style-two .pla-team-desc {
+    padding: 32px 25px 30px;
+}
+.pla-team-box.pla-team-grid--style-one h5 {
+    font-size: 16px;
+    color: #686868;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    margin-bottom: -2.5px;
+}
+.pla-team-box.pla-team-grid--style-one span {
+    font-size: 12px;
+    color: #686868;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 27px;
+}
+.pla-team-box.pla-team-grid--style-one p {
+    font-size: 14px;
+    line-height: 19px;
+    color: #AAA6A6;
+    margin: 0;
+}
+.pla-social {
+    margin: 30px 0 0;
+    padding: 0;
+}
+.pla-social li {
+    display: inline-block;
+}
+.pla-social li a {
+    display: inline-block;
+    color: #AAA6A6;
+    padding: 0  9px;
+    font-size: 18px;
+}

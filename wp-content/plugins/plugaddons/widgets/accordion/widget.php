@@ -168,7 +168,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label' => __('Background Active Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .single-accordion.active .pla-accordion-title' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} {{CURRENT_ITEM}}.active .pla-accordion-title' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => ['customize' => 'yes'],
                 'style_transfer' => true,
@@ -520,7 +520,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label' => __('Background Active Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-accordion-title.on' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .single-accordion.active .pla-accordion-title' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -540,7 +540,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label' => __('Text Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pla-accordion-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .pla-accordion-title h1,{{WRAPPER}} .pla-accordion-title h2,{{WRAPPER}} .pla-accordion-title h3,{{WRAPPER}} .pla-accordion-title h4,{{WRAPPER}} .pla-accordion-title h5,{{WRAPPER}} .pla-accordion-title h6,{{WRAPPER}} .pla-accordion-title .pla-accordion-icon,{{WRAPPER}} .pla-accordion-title .pla-accordion-number' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -684,17 +684,5 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
     }
 
 
-    /**
-     * Render Plugaddons widget output on the frontend.
-     *
-     * Written in JS and used to generate the final HTML.
-     *
-     * @since 1.0.0
-     * @access protected
-     */
-    protected function _content_template_()
-    {
-
-    }
 
 }

@@ -265,12 +265,14 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/testimonial-grid/widget.php');
 		require_once(__DIR__ . '/widgets/testimonial-carousel/widget.php');
 		require_once(__DIR__ . '/widgets/accordion/widget.php');
+		require_once(__DIR__ . '/widgets/team-grid/widget.php');
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_Grid() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Accordion() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_Grid() );
 
 
 	}

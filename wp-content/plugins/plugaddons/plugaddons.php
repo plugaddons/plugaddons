@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Plugaddons Extension
+Plugin Name: Plugaddons Elementor Addons
 Plugin URI: http://plugaddons.com/plugaddons
-Description: Plugaddons for creating Elementor Extensions
+Description: Plugaddons is a collection of slick, powerful widgets that works seamlessly with Elementor page builder. It’s trendy look with detail customization features allows to create extraordinary designs instantly. Plugaddons is free, rapidly growing and comes with great support.
 Version: 1.0
 Author: Plugaddons
 Author URI: http://plugaddons.com/

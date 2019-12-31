@@ -677,9 +677,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             <?php
             endforeach;
             ?>
-
-
         </div>
+
 
         <?php
     }

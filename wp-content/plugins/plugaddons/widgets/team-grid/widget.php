@@ -8,6 +8,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Typography;
+use Elementor\Scheme_Color;
 use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
@@ -150,28 +151,11 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
         $this->start_controls_section(
             '_section_team',
             [
-                'label' => __('Team', 'plugaddons'),
+                'label' => __('Image', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
 
-        $this->add_control(
-            'grid_view',
-            [
-                'type' => Controls_Manager::SELECT,
-                'label' => __('Team Grid', 'plugaddons'),
-                'separator' => 'before',
-                'default' => 'style-one',
-                'options' => [
-                    'style-one' => __('Style One', 'plugaddons'),
-                    'style-two' => __('Style Two', 'plugaddons'),
-                    'style-three' => __('Style Three', 'plugaddons'),
-                    'style-four' => __('Style Four', 'plugaddons'),
-                    'style-five' => __('Style Five', 'plugaddons')
-                ],
-                'style_transfer' => true,
-            ]
-        );
         $this->add_control(
             'team_image',
             [
@@ -228,6 +212,35 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
+            'image_position',
+            [
+                'label' => __( 'Image Position', 'plugaddons' ),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => false,
+                'options' => [
+                    'left' => [
+                        'title' => __( 'Left', 'plugaddons' ),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'top' => [
+                        'title' => __( 'Top', 'plugaddons' ),
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'right' => [
+                        'title' => __( 'Right', 'plugaddons' ),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'toggle' => false,
+                'default' => 'top',
+                'prefix_class' => 'pla-team--',
+                'style_transfer' => true,
+                'condition' => [
+                    'image_customize' => 'yes'
+                ],
+            ]
+        );
+        $this->add_control(
             'offset_toggle',
             [
                 'label' => __( 'Offset', 'plugaddons' ),
@@ -240,6 +253,25 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
         );
 
         $this->start_popover();
+        $this->add_responsive_control(
+            'image_offset_x',
+            [
+                'label' => __( 'Offset Left', 'happy-elementor-addons' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'condition' => [
+                    'offset_toggle' => 'yes'
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                ],
+                'condition' => ['image_customize' => 'yes', 'image_position!' => 'top'],
+                'render_type' => 'ui'
+            ]
+        );
         $this->add_responsive_control(
             'image_offset_y',
             [
@@ -256,15 +288,21 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     ],
                 ],
                 'selectors' => [
-
-                    // Image translate styles
-                    '(desktop){{WRAPPER}} .pla-team-header img' => '-ms-transform: translateY({{image_offset_y.SIZE || 0}}{{UNIT}}); -webkit-transform: translateY({{image_offset_y.SIZE || 0}}{{UNIT}}); transform: translateY({{image_offset_y.SIZE || 0}}{{UNIT}});',
-                    '(tablet){{WRAPPER}} .pla-team-header img' => '-ms-transform: translateY({{image_offset_y_tablet.SIZE || 0}}{{UNIT}}); -webkit-transform: translateY({{image_offset_y_tablet.SIZE || 0}}{{UNIT}}); transform: translateY({{image_offset_y_tablet.SIZE || 0}}{{UNIT}});',
-                    '(mobile){{WRAPPER}} .pla-team-header img' => '-ms-transform: translateY({{image_offset_y_mobile.SIZE || 0}}{{UNIT}}); -webkit-transform: translateY({{image_offset_y_mobile.SIZE || 0}}{{UNIT}}); transform: translateY({{image_offset_y_mobile.SIZE || 0}}{{UNIT}});',
-                ],
+                    '(desktop){{WRAPPER}} .pla-team-header img' => '-ms-transform: translate({{image_offset_x.SIZE || 0}}{{UNIT}}, {{image_offset_y.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{image_offset_x.SIZE || 0}}{{UNIT}}, {{image_offset_y.SIZE || 0}}{{UNIT}}); transform: translate({{image_offset_x.SIZE || 0}}{{UNIT}}, {{image_offset_y.SIZE || 0}}{{UNIT}});',
+                    '(tablet){{WRAPPER}} .pla-team-header img' => '-ms-transform: translate({{image_offset_x_tablet.SIZE || 0}}{{UNIT}}, {{image_offset_y_tablet.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{image_offset_x_tablet.SIZE || 0}}{{UNIT}}, {{image_offset_y_tablet.SIZE || 0}}{{UNIT}}); transform: translate({{image_offset_x_tablet.SIZE || 0}}{{UNIT}}, {{image_offset_y_tablet.SIZE || 0}}{{UNIT}});',
+                    '(mobile){{WRAPPER}} .pla-team-header img' => '-ms-transform: translate({{image_offset_x_mobile.SIZE || 0}}{{UNIT}}, {{image_offset_y_mobile.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{image_offset_x_mobile.SIZE || 0}}{{UNIT}}, {{image_offset_y_mobile.SIZE || 0}}{{UNIT}}); transform: translate({{image_offset_x_mobile.SIZE || 0}}{{UNIT}}, {{image_offset_y_mobile.SIZE || 0}}{{UNIT}});',
+                    ],
             ]
         );
         $this->end_popover();
+        $this->end_controls_section();
+        $this->start_controls_section(
+            '_section_team_title',
+            [
+                'label' => __('Title & Bio', 'plugaddons'),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
         $this->add_control(
             'team_name',
             [
@@ -285,11 +323,24 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
+            'enable_bio',
+            [
+                'label' => __( 'Enable Bio?', 'plugaddons' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'plugaddons' ),
+                'label_off' => __( 'No', 'plugaddons' ),
+                'return_value' => 'yes',
+                'style_transfer' => true,
+                'default' => 'yes',
+            ]
+        );
+        $this->add_control(
             'team_content',
             [
                 'label' => __('Bio', 'plugaddons'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'label_block' => true,
+                'condition' => ['enable_bio' => 'yes'],
                 'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ', 'plugaddons'),
             ]
         );
@@ -312,6 +363,20 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'default' => 'yes',
                 'separator' => 'before',
                 'style_transfer' => true,
+            ]
+        );
+        $this->add_control(
+            'show_popup',
+            [
+                'label' => __( 'Show Popup', 'plugaddons' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'plugaddons' ),
+                'label_off' => __( 'Hide', 'plugaddons' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'separator' => 'none',
+                'style_transfer' => true,
+                'condition' => ['show_profiles' => 'yes']
             ]
         );
 
@@ -516,7 +581,6 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             [
                 'label' => __('Team', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_STYLE,
-//                'condition' => ['grid_view!' => 'style-four']
             ]
 
         );
@@ -548,17 +612,17 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
+            Group_Control_Border::get_type(),
             [
-                'name' => 'box_shadow',
-                'label' => __( 'Box Shadow', 'plugaddons' ),
+                'name' => 'team_border',
                 'selector' => '{{WRAPPER}} .pla-team-box',
             ]
         );
         $this->add_group_control(
-            Group_Control_Border::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'team_border',
+                'name' => 'box_shadow',
+                'label' => __( 'Box Shadow', 'plugaddons' ),
                 'selector' => '{{WRAPPER}} .pla-team-box',
             ]
         );
@@ -579,17 +643,17 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
+            Group_Control_Border::get_type(),
             [
-                'name' => 'box_shadow_hover',
-                'label' => __( 'Box Shadow', 'plugaddons' ),
+                'name' => 'team_border_hover',
                 'selector' => '{{WRAPPER}} .pla-team-box:hover',
             ]
         );
         $this->add_group_control(
-            Group_Control_Border::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
-                'name' => 'team_border_hover',
+                'name' => 'box_shadow_hover',
+                'label' => __( 'Box Shadow', 'plugaddons' ),
                 'selector' => '{{WRAPPER}} .pla-team-box:hover',
             ]
         );
@@ -603,14 +667,62 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name' => 'header_background',
                 'label' => __( 'Background', 'plugaddons' ),
                 'types' => [ 'classic', 'gradient', 'video' ],
-                'selector' => '{{WRAPPER}} .pla-team-header-color',
-                'condition' => ['grid_view' => 'style-one']
+                'selector' => '{{WRAPPER}} .pla-team-header-customize',
+            ]
+        );
+        $this->add_responsive_control(
+            'image_width',
+            [
+                'label' => __( 'Width', 'happy-elementor-addons' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ '%', 'px' ],
+                'desktop_default' => [
+                    'unit' => '%',
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                ],
+                'range' => [
+                    '%' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                    'px' => [
+                        'min' => 50,
+                        'max' => 1000,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-team-header' => 'flex: 0 0 {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}}.pla-team--right .pla-team-desc, {{WRAPPER}}.pla-team--left .ha-card-desc' => 'flex: 0 0 calc(100% - {{SIZE || 50}}{{UNIT}}); max-width: calc(100% - {{SIZE || 50}}{{UNIT}});',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'image_height',
+            [
+                'label' => __( 'Height', 'happy-elementor-addons' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 50,
+                        'max' => 1000,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-team-header, {{WRAPPER}} .pla-team-header img' => 'height: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
         $this->add_control(
@@ -622,24 +734,22 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'range' => [
                     'px' => [
                         'min' => 0,
-                        'max' => 60,
+                        'max' => 500,
                         'step' => 1,
                     ],
                     '%' => [
                         'min' => 0,
-                        'max' => 60,
+                        'max' => 500,
                     ],
                 ],
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 100,
-                ],
+
                 'selectors' => [
-                    '{{WRAPPER}} .pla-team-header-color' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-team-header-customize' => 'height: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => ['image_customize' => 'yes']
             ]
         );
+
         $this->add_control(
             'image_border_radius',
             [
@@ -666,7 +776,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
         $this->start_controls_section(
             '_section_content',
             [
-                'label' => __('Content', 'plugaddons'),
+                'label' => __('Title & Bio', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -785,7 +895,8 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
         $this->start_controls_tab(
             '_tab_team_info',
             [
-                'label' => __( 'Info', 'plugaddons' ),
+                'label' => __( 'Bio', 'plugaddons' ),
+                'condition' => ['enable_bio' => 'yes'],
             ]
         );
 
@@ -819,6 +930,23 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             [
                 'label' => __( 'Social Icons', 'plugaddons' ),
                 'tab'   => Controls_Manager::TAB_STYLE,
+                'condition' => ['show_profiles' => 'yes']
+            ]
+        );
+        $this->add_control(
+            'social_bg_color',
+            [
+                'label' => __( 'Background Color', 'plugin-domain' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .social-popup .pla-social' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .social-popup .pla-social:after' => 'border-color: {{VALUE}} transparent transparent transparent',
+                ],
+                'condition' => ['show_popup' => 'yes']
             ]
         );
 
@@ -844,6 +972,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     'unit' => 'px',
                     'size' => 40,
                 ],
+                'condition' => ['show_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'width: {{SIZE}}{{UNIT}};',
                 ],
@@ -859,6 +988,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     'unit' => 'px',
                     'size' => 40,
                 ],
+                'condition' => ['show_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .pla-social li > a' => 'line-height: {{SIZE}}{{UNIT}};',
@@ -882,7 +1012,8 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'links_border',
-                'selector' => '{{WRAPPER}} .pla-social li > a'
+                'selector' => '{{WRAPPER}} .pla-social li > a',
+                'condition' => ['show_popup!' => 'yes'],
             ]
         );
 
@@ -892,6 +1023,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'label' => __( 'Border Radius', 'plugaddons' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
+                'condition' => ['show_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -991,34 +1123,50 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $grid_view = $settings['grid_view'];
         $content = isset($settings['team_content']) ? $settings['team_content'] : '';
         $name = isset($settings['team_name']) ? $settings['team_name'] : '';
         $designation = isset($settings['team_designation']) ? $settings['team_designation'] : '';
         $this->add_inline_editing_attributes('team_content', 'none');
         $this->add_render_attribute('team_content', [
-            'class' => "grid-content grid-content--{$grid_view}"
+            'class' => "grid-content"
         ]);
         $this->add_inline_editing_attributes('team_name', 'none');
         $this->add_render_attribute('team_name', [
-            'class' => "grid-name grid-name--{$grid_view}"
+            'class' => "grid-name"
         ]);
         $this->add_inline_editing_attributes('team_designation', 'none');
         $this->add_render_attribute('team_designation', [
-            'class' => "grid-designation grid-designation--{$grid_view}"
+            'class' => "grid-designation"
         ]);
         ?>
-
-        <div class="pla-team-box pla-team-grid--<?php echo esc_attr($grid_view); ?> text-center">
-
-
+        <div class="pla-team-box <?php echo esc_attr(($settings['show_popup'] == 'yes') ? 'social-popup' : '');?> text-center">
             <?php if ( $settings['team_image']['url'] || $settings['team_image']['id'] ) :
                 $this->add_render_attribute( 'team_image', 'src', $settings['team_image']['url'] );
                 $this->add_render_attribute( 'team_image', 'alt', Control_Media::get_image_alt( $settings['team_image'] ) );
                 $this->add_render_attribute( 'team_image', 'title', Control_Media::get_image_title( $settings['team_image'] ) );
 
                 ?>
-                <div class="pla-team-header <?php echo esc_attr(($settings['image_customize'] == 'yes')? 'pla-team-header-color' : '');?>">
+                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_popup'] == 'yes') : ?>
+                    <ul class="pla-social pla-team-wewak-color">
+                        <?php
+                        foreach ( $settings['social_profiles'] as $profile ) :
+                            $icon = $profile['name'];
+                            $url = esc_url( $profile['link']['url'] );
+                            if ($profile['name'] === 'website') {
+                                $icon = 'globe';
+                            } elseif ($profile['name'] === 'email') {
+                                $icon = 'envelope';
+                                $url = 'mailto:' . antispambot( $profile['email'] );
+                            }
+                            printf( '<li><a class="elementor-repeater-item-%s" target="_blank" rel="noopener" href="%s"><i class="fa fa-%s" aria-hidden="true"></i></a></li>',
+                                esc_attr( $profile['_id'] ),
+                                $url,
+                                esc_attr( $icon )
+                            );
+                        endforeach; ?>
+                    </ul>
+                <?php endif;?>
+                <div class="pla-team-header <?php echo esc_attr(($settings['image_customize'] == 'yes')? 'pla-team-header-customize' : '');?>">
                     <?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'team_image' ); ?>
                 </div>
             <?php endif; ?>
@@ -1027,34 +1175,31 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     <?php echo esc_html($name); ?>
                 </h5>
                 <span <?php echo $this->get_render_attribute_string('team_designation') ?>><?php echo esc_html($designation); ?></span>
+                <?php if ($settings['enable_bio'] == 'yes'):?>
                 <p <?php echo $this->get_render_attribute_string('team_content') ?>>
                     <?php echo wp_kses_post($content); ?>
                 </p>
-
-
-            <?php if ( is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] ) : ?>
-                <ul class="pla-social">
-
-                    <?php
-                    foreach ( $settings['social_profiles'] as $profile ) :
-                        $icon = $profile['name'];
-                        $url = esc_url( $profile['link']['url'] );
-
-                        if ($profile['name'] === 'website') {
-                            $icon = 'globe';
-                        } elseif ($profile['name'] === 'email') {
-                            $icon = 'envelope';
-                            $url = 'mailto:' . antispambot( $profile['email'] );
-                        }
-
-                        printf( '<li><a class="elementor-repeater-item-%s" target="_blank" rel="noopener" href="%s"><i class="fa fa-%s" aria-hidden="true"></i></a></li>',
-                            esc_attr( $profile['_id'] ),
-                            $url,
-                            esc_attr( $icon )
-                        );
-                    endforeach; ?>
-                </ul>
-            <?php endif;?>
+                <?php endif;?>
+                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_popup'] != 'yes') : ?>
+                    <ul class="pla-social">
+                        <?php
+                        foreach ( $settings['social_profiles'] as $profile ) :
+                            $icon = $profile['name'];
+                            $url = esc_url( $profile['link']['url'] );
+                            if ($profile['name'] === 'website') {
+                                $icon = 'globe';
+                            } elseif ($profile['name'] === 'email') {
+                                $icon = 'envelope';
+                                $url = 'mailto:' . antispambot( $profile['email'] );
+                            }
+                            printf( '<li><a class="elementor-repeater-item-%s" target="_blank" rel="noopener" href="%s"><i class="fa fa-%s" aria-hidden="true"></i></a></li>',
+                                esc_attr( $profile['_id'] ),
+                                $url,
+                                esc_attr( $icon )
+                            );
+                        endforeach; ?>
+                    </ul>
+                <?php endif;?>
             </div>
         </div>
         <?php

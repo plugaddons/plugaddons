@@ -1334,60 +1334,42 @@ Testimonial Carousel
 
 
 /*Team CSS*/
-.pla-team-box{
-    overflow: hidden;
-}
-.pla-team-box.pla-team-grid--style-one {
+
+.pla-team-box {
     box-shadow: 0 1px 4px 0 rgba(9,30,66,.15);
     border-radius: 10px;
-    margin-bottom: 30px;
     transition: all 0.3s ease-in-out;
     transform: translateY(0);
     overflow: hidden;
 }
-.pla-team-box.pla-team-grid--style-one:hover {
+.pla-team-box:hover {
     box-shadow: 0 8px 20px -7px rgba(9,30,66,.3);
     transform: translateY(-4px);
 }
-.pla-team-area .row:last-child .pla-team-grid--style-one {
+.pla-team-area .row:last-child .pla-team-box {
     margin-bottom: 0;
 }
-/*.pla-team-box.pla-team-grid--style-one .pla-team-header {*/
-/*    height: 121px;*/
-/*    position: relative;*/
-/*}*/
-/*.pla-team-box.pla-team-grid--style-one .pla-team-header img {*/
-/*    position: absolute;*/
-/*    bottom: -37px;*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%);*/
-/*    width: 75px;*/
-/*    height: 75px;*/
-/*    border-radius: 50%;*/
-/*    border:3px solid #FFFFFF;*/
-/*}*/
-
-.pla-team-box.pla-team-grid--style-one .pla-team-desc {
+.pla-team-box .pla-team-desc {
     padding: 55px 14px 22px;
 }
-.pla-team-box.pla-team-grid--style-two .pla-team-desc {
+.pla-team-box .pla-team-desc {
     padding: 32px 25px 30px;
 }
-.pla-team-box.pla-team-grid--style-one h5 {
+.pla-team-box h5 {
     font-size: 16px;
     color: #686868;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     margin-bottom: -2.5px;
 }
-.pla-team-box.pla-team-grid--style-one span {
+.pla-team-box span {
     font-size: 12px;
     color: #686868;
     font-weight: 400;
     display: block;
     margin-bottom: 27px;
 }
-.pla-team-box.pla-team-grid--style-one p {
+.pla-team-box p {
     font-size: 14px;
     line-height: 19px;
     color: #AAA6A6;
@@ -1405,4 +1387,70 @@ Testimonial Carousel
     color: #AAA6A6;
     padding: 0  9px;
     font-size: 18px;
+}
+.pla-team-box.social-popup{
+    overflow: inherit;
+}
+.pla-team-box.social-popup .pla-social {
+    display: inline-block;
+    margin: 0;
+    padding: 0 5px;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 83%;
+    background: #f1899a;
+    top: -60px;
+    left: 20px;
+}
+.pla-team-box.social-popup .pla-social li a{
+    color: #fff;
+}
+.pla-team-box.social-popup:hover .pla-social {
+    opacity: 1;
+    visibility: visible;
+}
+.pla-team-box.social-popup .pla-social:after {
+    position: absolute;
+    content: "";
+    bottom: -18px;
+    left: 12px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 23px 15.5px 0 15.5px;
+    border-color: #f1899a transparent transparent transparent;
+    transform: rotate(17deg);
+}
+.pla-team--left .pla-team-box {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-align: left;
+}
+.pla-team--right .pla-team-box {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    text-align: right;
+}
+.pla-team--left .pla-team-box .pla-team-header,
+.pla-team--left .pla-team-box .pla-team-desc,
+.pla-team--right .pla-team-box .pla-team-header,
+.pla-team--right .pla-team-box .pla-team-desc{
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.pla-team--left .pla-team-box .pla-team-desc, .pla-team--right .pla-team-box .pla-team-desc {
+    padding: 15px 15px;
+}
+.pla-team--left .pla-team-box span,
+.pla-team--right .pla-team-box span{
+    margin-bottom: 10px;
+}
+.pla-team--left .pla-team-box .pla-social,
+.pla-team--right .pla-team-box .pla-social{
+    margin: 15px 0 0;
+    padding: 0;
 }

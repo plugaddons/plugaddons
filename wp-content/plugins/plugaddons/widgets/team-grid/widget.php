@@ -344,6 +344,33 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ', 'plugaddons'),
             ]
         );
+        $this->add_control(
+            'text_position',
+            [
+                'label' => __( 'Position', 'plugaddons' ),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => false,
+                'options' => [
+                    'left' => [
+                        'title' => __( 'Left', 'plugaddons' ),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => __( 'Top', 'plugaddons' ),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => __( 'Right', 'plugaddons' ),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'toggle' => false,
+                'default' => 'center',
+                'prefix_class' => 'pla-team-align--',
+                'style_transfer' => true,
+
+            ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
             '_section_social',
@@ -366,7 +393,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'show_popup',
+            'show_profiles_popup',
             [
                 'label' => __( 'Show Popup', 'plugaddons' ),
                 'type' => Controls_Manager::SWITCHER,
@@ -936,7 +963,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
         $this->add_control(
             'social_bg_color',
             [
-                'label' => __( 'Background Color', 'plugin-domain' ),
+                'label' => __( 'Background Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -946,7 +973,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     '{{WRAPPER}} .social-popup .pla-social' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .social-popup .pla-social:after' => 'border-color: {{VALUE}} transparent transparent transparent',
                 ],
-                'condition' => ['show_popup' => 'yes']
+                'condition' => ['show_profiles_popup' => 'yes']
             ]
         );
 
@@ -972,7 +999,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     'unit' => 'px',
                     'size' => 40,
                 ],
-                'condition' => ['show_popup!' => 'yes'],
+                'condition' => ['show_profiles_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'width: {{SIZE}}{{UNIT}};',
                 ],
@@ -988,7 +1015,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     'unit' => 'px',
                     'size' => 40,
                 ],
-                'condition' => ['show_popup!' => 'yes'],
+                'condition' => ['show_profiles_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .pla-social li > a' => 'line-height: {{SIZE}}{{UNIT}};',
@@ -1013,7 +1040,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             [
                 'name' => 'links_border',
                 'selector' => '{{WRAPPER}} .pla-social li > a',
-                'condition' => ['show_popup!' => 'yes'],
+                'condition' => ['show_profiles_popup!' => 'yes'],
             ]
         );
 
@@ -1023,7 +1050,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                 'label' => __( 'Border Radius', 'plugaddons' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%' ],
-                'condition' => ['show_popup!' => 'yes'],
+                'condition' => ['show_profiles_popup!' => 'yes'],
                 'selectors' => [
                     '{{WRAPPER}} .pla-social li > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
@@ -1139,14 +1166,14 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             'class' => "grid-designation"
         ]);
         ?>
-        <div class="pla-team-box <?php echo esc_attr(($settings['show_popup'] == 'yes') ? 'social-popup' : '');?> text-center">
+        <div class="pla-team-box <?php echo esc_attr($settings['text_position']);?> <?php echo esc_attr(($settings['show_profiles_popup'] == 'yes') ? 'social-popup' : '');?>">
             <?php if ( $settings['team_image']['url'] || $settings['team_image']['id'] ) :
                 $this->add_render_attribute( 'team_image', 'src', $settings['team_image']['url'] );
                 $this->add_render_attribute( 'team_image', 'alt', Control_Media::get_image_alt( $settings['team_image'] ) );
                 $this->add_render_attribute( 'team_image', 'title', Control_Media::get_image_title( $settings['team_image'] ) );
 
                 ?>
-                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_popup'] == 'yes') : ?>
+                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_profiles_popup'] == 'yes') : ?>
                     <ul class="pla-social pla-team-wewak-color">
                         <?php
                         foreach ( $settings['social_profiles'] as $profile ) :
@@ -1180,7 +1207,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
                     <?php echo wp_kses_post($content); ?>
                 </p>
                 <?php endif;?>
-                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_popup'] != 'yes') : ?>
+                <?php if (is_array( $settings['social_profiles' ] ) && $settings['show_profiles' ] && $settings['show_profiles_popup'] != 'yes') : ?>
                     <ul class="pla-social">
                         <?php
                         foreach ( $settings['social_profiles'] as $profile ) :

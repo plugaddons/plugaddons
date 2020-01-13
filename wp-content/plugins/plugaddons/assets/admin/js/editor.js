@@ -36,4 +36,25 @@
 
     } );
 
+    // elementor.hooks.addAction( "panel/open_editor/widget/team-carousel", function( panel, model, view ) {
+    //
+    //     var $selector = $("input:hidden[value='style_select_hidden']").parents('.elementor-control').prev().find('select');
+    //     $selector.on('change', function(){
+    //         getValue($(this));
+    //     });
+    //     getValue($selector);
+    //     var $element = panel.$el;
+    //
+    //     elementObservation($element.find('.elementor-repeater-fields-wrapper'),function(mutation){
+    //         getValue($selector);
+    //     });
+    //
+    //     function getValue(_select) {
+    //        $("input:hidden[value='items_hidden_selector']").parents('.elementor-control').prev().hide();
+    //     }
+    //
+    // } );
+
+
+
 })(jQuery);

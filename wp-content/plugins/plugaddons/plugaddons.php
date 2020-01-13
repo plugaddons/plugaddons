@@ -154,11 +154,13 @@ final class Elementor_Plugaddons_Extension {
      * @access public
      */
 	public function pla_assets_files(){
+	    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css', null, '5.10.0', 'all');
 	    wp_enqueue_style('slick-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick.css', null, '1.0.0', 'all');
 	    wp_enqueue_style('slick-theme-css', plugin_dir_url( __FILE__ ). '/assets/public/css/slick-theme.css', null, '1.0.0', 'all');
 	    wp_enqueue_style('plugaddons-css', plugin_dir_url( __FILE__ ). '/assets/public/css/main.css', null, time(), 'all');
 	    wp_enqueue_script('jquery-numerator-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery-numerator.js', array('jquery'), time(), true);
 	    wp_enqueue_script('slick-js', plugin_dir_url( __FILE__ ).'/assets/public/js/slick.min.js', array('jquery'), '1.0.0', true);
+	    wp_enqueue_script('accordion-js', plugin_dir_url( __FILE__ ).'/assets/public/js/jquery.accordable.min.js', array('jquery'), '1.0.0', true);
 	    wp_enqueue_script('pla-hendale-js', plugin_dir_url( __FILE__ ).'/assets/public/js/pla-main.js', array('jquery','jquery-numerator-js'), time(), true);
 
 	}
@@ -266,6 +268,7 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/testimonial-carousel/widget.php');
 		require_once(__DIR__ . '/widgets/accordion/widget.php');
 		require_once(__DIR__ . '/widgets/team-grid/widget.php');
+		require_once(__DIR__ . '/widgets/team-carousel/widget.php');
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar() );
@@ -273,6 +276,7 @@ final class Elementor_Plugaddons_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Testimonials_carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Accordion() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_Grid() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_carousel() );
 
 
 	}

@@ -816,7 +816,6 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         }
         ?>
 
-
         <div class="accordion">
             <?php
             foreach ($settings['accordions'] as $index => $accordion) :

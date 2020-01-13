@@ -155,6 +155,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             '_tab_title_normal',
             [
                 'label' => __('Normal', 'plugaddons'),
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -162,6 +164,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             [
                 'label' => __('Title & Icons Options', 'plugin-name'),
                 'type' => Controls_Manager::HEADING,
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -176,14 +180,12 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'style_transfer' => true,
             ]
         );
-        $repeater->add_control(
-            'title_border',
+        $repeater->add_group_control(
+            Group_Control_Border::get_type(),
             [
-                'label' => __('Border Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-title' => 'border-color: {{VALUE}};',
-                ],
+                'name' => 'title_border',
+                'label' => __( 'Border', 'plugaddons' ),
+                'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .pla-accordion-title',
                 'condition' => ['customize' => 'yes'],
                 'style_transfer' => true,
             ]
@@ -207,6 +209,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label' => __('Number Options', 'plugin-name'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -238,6 +242,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             '_tab_title_active',
             [
                 'label' => __('Active', 'plugaddons'),
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -245,6 +251,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             [
                 'label' => __('Title & Icons Options', 'plugaddons'),
                 'type' => Controls_Manager::HEADING,
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -259,14 +267,12 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'style_transfer' => true,
             ]
         );
-        $repeater->add_control(
-            'active_title_border',
+        $repeater->add_group_control(
+            Group_Control_Border::get_type(),
             [
-                'label' => __('Border Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} {{CURRENT_ITEM}}.open .pla-accordion-title' => 'border-color: {{VALUE}};',
-                ],
+                'name' => 'active_title_border',
+                'label' => __( 'Border', 'plugaddons' ),
+                'selector' => '{{WRAPPER}} {{CURRENT_ITEM}}.open .pla-accordion-title',
                 'condition' => ['customize' => 'yes'],
                 'style_transfer' => true,
             ]
@@ -290,6 +296,8 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'label' => __('Number Options', 'plugin-name'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
+                'condition' => ['customize' => 'yes'],
+                'style_transfer' => true,
             ]
         );
         $repeater->add_control(
@@ -604,8 +612,16 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
+        $this->start_controls_tabs('_tab_style_title');
+        $this->start_controls_tab(
+            '_tab_title_normal',
+            [
+                'label' => __('Normal', 'plugaddons'),
+            ]
+        );
         $this->add_control(
-            'title_bg',
+            'normal_style_title_bg',
             [
                 'label' => __('Background Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
@@ -615,29 +631,9 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             ]
         );
         $this->add_control(
-            'title_active_bg',
+            'normal_style_title_color',
             [
-                'label' => __('Background Active Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .single-accordion.open .pla-accordion-title' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'title_border',
-            [
-                'label' => __('Border Color', 'plugaddons'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .pla-accordion-title' => 'border-color: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_control(
-            'title_color',
-            [
-                'label' => __('Text Color', 'plugaddons'),
+                'label' => __('Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-accordion-title h1,{{WRAPPER}} .pla-accordion-title h2,{{WRAPPER}} .pla-accordion-title h3,{{WRAPPER}} .pla-accordion-title h4,{{WRAPPER}} .pla-accordion-title h5,{{WRAPPER}} .pla-accordion-title h6,{{WRAPPER}} .pla-accordion-title .pla-accordion-icon,{{WRAPPER}} .pla-accordion-title .pla-accordion-number' => 'color: {{VALUE}};',
@@ -645,9 +641,18 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'normal_style_border',
+                'label' => __( 'Border', 'plugaddons' ),
+                'selector' => '{{WRAPPER}} .pla-accordion-title',
+            ]
+        );
+
+        $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'title_typography',
+                'name' => 'normal_style_title_typography',
                 'selector' => '{{WRAPPER}} .pla-accordion-title h5',
                 'scheme' => Scheme_Typography::TYPOGRAPHY_3,
             ]
@@ -655,12 +660,12 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         $this->add_group_control(
             Group_Control_Text_Shadow::get_type(),
             [
-                'name' => 'title_text_shadow',
+                'name' => 'normal_style_title_text_shadow',
                 'selector' => '{{WRAPPER}} .pla-accordion-title h5',
             ]
         );
         $this->add_control(
-            'number_color',
+            'normal_style_number_color',
             [
                 'label' => __('Number Background Color', 'plugaddons'),
                 'type' => Controls_Manager::COLOR,
@@ -670,6 +675,73 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
                 'condition' => ['show_number' => 'yes']
             ]
         );
+
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            '_tab_style_active',
+            [
+                'label' => __('Active', 'plugaddons'),
+            ]
+        );
+        $this->add_control(
+            'active_style_bg',
+            [
+                'label' => __('Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .single-accordion.open .pla-accordion-title' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'active_style_title_color',
+            [
+                'label' => __('Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .single-accordion.open .pla-accordion-title h1,{{WRAPPER}} .single-accordion.open .pla-accordion-title h2,{{WRAPPER}} .single-accordion.open .pla-accordion-title h3,{{WRAPPER}} .single-accordion.open .pla-accordion-title h4,{{WRAPPER}} .single-accordion.open .pla-accordion-title h5,{{WRAPPER}} .single-accordion.open .pla-accordion-title h6,{{WRAPPER}} .single-accordion.open .pla-accordion-title .pla-accordion-icon,{{WRAPPER}} .single-accordion.open .pla-accordion-title .pla-accordion-number' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'active_style_border',
+                'label' => __( 'Border', 'plugaddons' ),
+                'selector' => '{{WRAPPER}} .single-accordion.open .pla-accordion-title',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'active_style_title_typography',
+                'selector' => '{{WRAPPER}} .single-accordion.open .pla-accordion-title h5',
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Text_Shadow::get_type(),
+            [
+                'name' => 'active_title_text_shadow',
+                'selector' => '{{WRAPPER}} .single-accordion.open .pla-accordion-title h5',
+            ]
+        );
+        $this->add_control(
+            'active_style_number_color',
+            [
+                'label' => __('Number Background Color', 'plugaddons'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .single-accordion.open .pla-accordion-number' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => ['show_number' => 'yes']
+            ]
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -745,7 +817,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
         ?>
 
 
-        <ul class="accordion">
+        <div class="accordion">
             <?php
             foreach ($settings['accordions'] as $index => $accordion) :
                 $name_key = $this->get_repeater_setting_key('name', 'bars', $index);
@@ -778,7 +850,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
             <?php
             endforeach;
             ?>
-        </ul>
+        </div>
 
 
         <?php

@@ -271,6 +271,7 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/team-grid/widget.php');
 		require_once(__DIR__ . '/widgets/team-carousel/widget.php');
 		require_once(__DIR__ . '/widgets/card/widget.php');
+		require_once(__DIR__ . '/widgets/info-box/widget.php');
 
 
 
@@ -282,6 +283,7 @@ final class Elementor_Plugaddons_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_Grid() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Card() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_InfoBox() );
 
 
 

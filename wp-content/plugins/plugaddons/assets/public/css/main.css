@@ -1781,3 +1781,49 @@ Testimonial Carousel
     padding: 15px 15px;
 }
 
+
+
+
+/* Info Box CSS*/
+.pla-info-box {
+    position: relative;
+}
+
+
+.pla-info-box-align--center {
+    text-align: center;
+}
+.pla-info-box-align--left {
+    text-align: left;
+}
+.pla-info-box-align--right {
+    text-align: right;
+}
+.info-tag {
+    display: inline-block;
+    font-size: 16px;
+
+}
+.info-box-title {
+    font-size: 24px;
+    color: #6D6D6D;
+    font-weight: normal;
+}
+
+p.info-box-info {
+    color: #AAA6A6;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.pla-info-box .btn-pla {
+    color: #6D6D6D;
+    font-size: 16px;
+    font-weight: 500;
+}
+.pla-info-box-icon img {
+    background: #fff;
+}
+/*.pla-info-tag--left .info-tag{*/
+/*    po*/
+/*}*/

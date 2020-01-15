@@ -1,8 +1,10 @@
 <?php
 
 
+use Elementor\Widget_Base;
 use Elementor\Control_Media;
 use Elementor\Controls_Manager;
+use Elementor\Repeater;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Utils;
@@ -12,7 +14,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Typography;
 use Elementor\Scheme_Color;
 
-class Plugaddons_Team_carousel extends \Elementor\Widget_Base
+class Plugaddons_Team_carousel extends Widget_Base
 {
 
     /**
@@ -113,19 +115,19 @@ class Plugaddons_Team_carousel extends \Elementor\Widget_Base
         $this->add_control(
             'style_select_hidden',
             [
-                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::HIDDEN,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'default' => 'style_select_hidden'
             ]
         );
 
-        $repeater = new \Elementor\Repeater();
+        $repeater = new Repeater();
 
         $repeater->add_control(
             'team_image',
             [
                 'label' => __('Choose Image', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
+                'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
                 ],

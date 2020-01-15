@@ -1,6 +1,7 @@
 <?php
 
 
+use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Text_Shadow;
@@ -8,7 +9,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 
-class Plugaddons_Progressbar extends \Elementor\Widget_Base
+class Plugaddons_Progressbar extends Widget_Base
 {
 
     /**
@@ -23,7 +24,7 @@ class Plugaddons_Progressbar extends \Elementor\Widget_Base
      */
     public function get_name()
     {
-        return 'progressbar_widget';
+        return 'progressbar';
     }
 
     /**
@@ -423,17 +424,5 @@ class Plugaddons_Progressbar extends \Elementor\Widget_Base
     }
 
 
-    /**
-     * Render Plugaddons widget output on the frontend.
-     *
-     * Written in JS and used to generate the final HTML.
-     *
-     * @since 1.0.0
-     * @access protected
-     */
-    protected function _content_template_()
-    {
-
-    }
 
 }

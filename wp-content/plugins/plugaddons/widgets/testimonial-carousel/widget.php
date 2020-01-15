@@ -1,9 +1,16 @@
 <?php
 
 
+use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Repeater;
+use Elementor\Utils;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
+use Elementor\Scheme_Typography;
 
-class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
+class Plugaddons_Testimonials_carousel extends Widget_Base
 {
 
     /**
@@ -96,7 +103,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             '_section_testimonials',
             [
                 'label' => __('Testimonials', 'plugaddons'),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+                'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
 
@@ -104,7 +111,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
         $this->add_control(
             'carousel_view',
             [
-                'type' => \Elementor\Controls_Manager::SELECT,
+                'type' => Controls_Manager::SELECT,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'separator' => 'before',
                 'default' => 'style-one',
@@ -122,21 +129,21 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
         $this->add_control(
             'style_select_hidden',
             [
-                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::HIDDEN,
                 'label' => __('Testimonials Carousel Style', 'plugaddons'),
                 'default' => 'style_select_hidden'
             ]
         );
 
-        $repeater = new \Elementor\Repeater();
+        $repeater = new Repeater();
 
         $repeater->add_control(
             'testimonial_image',
             [
                 'label' => __('Choose Image', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
+                'type' => Controls_Manager::MEDIA,
                 'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                    'url' => Utils::get_placeholder_image_src(),
                 ],
 
             ]
@@ -144,7 +151,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
         $repeater->add_control(
             'items_hidden_selector',
             [
-                'type' => \Elementor\Controls_Manager::HIDDEN,
+                'type' => Controls_Manager::HIDDEN,
                 'label' => __('Items Hidden Selector', 'plugaddons'),
                 'default' => 'items_hidden_selector'
             ]
@@ -152,7 +159,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
         $repeater->add_control(
             'testimonial_name',
             [
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label' => __('Name', 'plugaddons'),
                 'default' => __('SHEHAB KHAN', 'plugaddons'),
                 'placeholder' => __('Type a name', 'plugaddons'),
@@ -163,7 +170,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'testimonial_designation',
             [
                 'label' => __('Designation', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => __('Programming', 'plugaddons'),
                 'placeholder' => __('Type a Designation', 'plugaddons'),
@@ -173,7 +180,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'testimonial_content',
             [
                 'label' => __('Description', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => Controls_Manager::TEXTAREA,
                 'label_block' => true,
                 'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.', 'plugaddons'),
             ]
@@ -183,7 +190,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             [
                 'label' => __('Rating', 'plugaddons'),
                 'separator' => 'before',
-                'type' => \Elementor\Controls_Manager::SELECT2,
+                'type' => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'options' => [
                     'rating-one' => __('1', 'plugaddons'),
@@ -205,38 +212,38 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'testimonials',
             [
                 'show_label' => false,
-                'type' => \Elementor\Controls_Manager::REPEATER,
+                'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'title_field' => '<# print((testimonial_name) ? (testimonial_name) : "") #>',
                 'default' => [
                     [
                         'testimonial_name' => 'SHEHAB KHAN',
                         'testimonial_image' => [
-                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => Utils::get_placeholder_image_src(),
                         ],
                     ],
                     [
                         'testimonial_name' => 'SHARIAR HOSSAIN',
                         'testimonial_image' => [
-                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => Utils::get_placeholder_image_src(),
                         ],
                     ],
                     [
                         'testimonial_name' => 'SHOHEL KHAN',
                         'testimonial_image' => [
-                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => Utils::get_placeholder_image_src(),
                         ],
                     ],
                     [
                         'testimonial_name' => 'AL SHAHRIAR',
                         'testimonial_image' => [
-                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => Utils::get_placeholder_image_src(),
                         ],
                     ],
                     [
                         'testimonial_name' => 'ABDULL AL AHAD',
                         'testimonial_image' => [
-                            'url' => \Elementor\Utils::get_placeholder_image_src(),
+                            'url' => Utils::get_placeholder_image_src(),
                         ],
                     ]
                 ]
@@ -248,14 +255,14 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             '_section_settings',
             [
                 'label' => __('Settings', 'plugaddons'),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+                'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
         $this->add_control(
             'loop',
             [
                 'label' => __('Infinite Loop?', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -267,7 +274,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'autoplay',
             [
                 'label' => __('Autoplay?', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -280,7 +287,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'autoplay_speed',
             [
                 'label' => __('Autoplay Speed', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
+                'type' => Controls_Manager::NUMBER,
                 'min' => 100,
                 'step' => 100,
                 'max' => 10000,
@@ -297,7 +304,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'animation_speed',
             [
                 'label' => __('Animation Speed', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
+                'type' => Controls_Manager::NUMBER,
                 'min' => 100,
                 'step' => 10,
                 'max' => 10000,
@@ -312,7 +319,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'center',
             [
                 'label' => __('Center Mode?', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -325,7 +332,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'animation_fade',
             [
                 'label' => __('Fade?', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => __('Yes', 'plugaddons'),
                 'label_off' => __('No', 'plugaddons'),
                 'return_value' => 'yes',
@@ -339,7 +346,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'navigation',
             [
                 'label' => __('Navigation', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SELECT,
+                'type' => Controls_Manager::SELECT,
                 'options' => [
                     'none' => __('None', 'plugaddons'),
                     'arrow' => __('Arrow', 'plugaddons'),
@@ -356,7 +363,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'slides_to_show',
             [
                 'label' => __('Slides To Show', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::SELECT,
+                'type' => Controls_Manager::SELECT,
                 'options' => [
                     1 => __('1 Slide', 'plugaddons'),
                     2 => __('2 Slides', 'plugaddons'),
@@ -408,7 +415,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'background',
                 'label' => __( 'Background', 'plugin-domain' ),
@@ -425,7 +432,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
+            Group_Control_Background::get_type(),
             [
                 'name' => 'hvr-background',
                 'label' => __( 'Background', 'plugin-domain' ),
@@ -439,7 +446,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'border_radius',
             [
                 'label' => __('Border Radius', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::DIMENSIONS,
+                'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
                     '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box,{{WRAPPER}} .pla-testimonial-box, {{WRAPPER}} .pla-testimonial-box:after, {{WRAPPER}} .testimonial-carousel.style-two .pla-testimonial-box-inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
@@ -448,7 +455,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Box_Shadow::get_type(),
+            Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'testimonial_box_shadow',
                 'selector' => '{{WRAPPER}} .pla-testimonial-box',
@@ -459,7 +466,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'inner_border',
             [
                 'label' => __('Border Color', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::COLOR,
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box:after,{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap, {{WRAPPER}} .pla-testimonial-box.pla-testimonial--grid-style-five .pla-authoe-img-wrap img, {{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-author-img-wrap' => 'border-color: {{VALUE}};',
                     '{{WRAPPER}} .testimonial-carousel.style-six .pla-author-img-wrap:after' => 'border-right-color: {{VALUE}};',
@@ -472,7 +479,7 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'image_bg',
             [
                 'label' => __('Image Background Color', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::COLOR,
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-three .pla-author-img-wrap:after' => 'background-color: {{VALUE}};',
                 ],
@@ -485,14 +492,14 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             '_section_tes_content',
             [
                 'label' => __('Content', 'plugaddons'),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
         $this->add_control(
             'color',
             [
                 'label' => __('Text Color', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::COLOR,
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .pla-testimonial-box-inner p,{{WRAPPER}} .testimonial-carousel .pla-testimonial-box.pla-testimonial--style-two .pla-testimonial--style-two span' => 'color: {{VALUE}};',
                 ],
@@ -502,27 +509,27 @@ class Plugaddons_Testimonials_carousel extends \Elementor\Widget_Base
             'name_color',
             [
                 'label' => __('Name Color', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::COLOR,
+                'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box h6,{{WRAPPER}} .testimonial-carousel .pla-testimonial-box span' => 'color: {{VALUE}};',
                 ],
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
+            Group_Control_Typography::get_type(),
             [
                 'name' => 'name_typography',
                 'label' => 'Name Typography',
                 'selector' => '{{WRAPPER}} .testimonial-carousel .pla-testimonial-box h6',
-                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
+            Group_Control_Typography::get_type(),
             [
                 'name' => 'info_typography',
                 'selector' => '{{WRAPPER}} .pla-testimonial-box .grid-designation, {{WRAPPER}} .pla-testimonial-box p',
-                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_3,
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
             ]
         );
         $this->end_controls_section();

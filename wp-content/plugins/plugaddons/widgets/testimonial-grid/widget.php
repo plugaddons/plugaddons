@@ -1,14 +1,14 @@
 <?php
 
 
+use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Typography;
-use Elementor\Repeater;
 use Elementor\Scheme_Typography;
+use Elementor\Utils;
 
-class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
+class Plugaddons_Testimonials_Grid extends Widget_Base
 {
 
     /**
@@ -127,9 +127,9 @@ class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
             'testimonial_image',
             [
                 'label' => __('Choose Image', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
+                'type' => Controls_Manager::MEDIA,
                 'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                    'url' => Utils::get_placeholder_image_src(),
                 ],
                 'condition' => [
                         'grid_view' => array('style-two', 'style-five'),
@@ -140,7 +140,7 @@ class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
             'testimonial_name',
             [
                 'label' => __('Name', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => __('John Doe', 'plugaddons'),
             ]
@@ -149,7 +149,7 @@ class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
             'testimonial_designation',
             [
                 'label' => __('Designation', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => __('Programming', 'plugaddons'),
             ]
@@ -158,7 +158,7 @@ class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
             'testimonial_content',
             [
                 'label' => __('Description', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => Controls_Manager::TEXTAREA,
                 'label_block' => true,
                 'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ', 'plugaddons'),
             ]
@@ -168,7 +168,7 @@ class Plugaddons_Testimonials_Grid extends \Elementor\Widget_Base
             [
                 'label' => __('Rating', 'plugaddons'),
                 'separator' => 'before',
-                'type' => \Elementor\Controls_Manager::SELECT2,
+                'type' => Controls_Manager::SELECT2,
                 'label_block' => true,
                 'options' => [
                     'rating-one' => __('1', 'plugaddons'),

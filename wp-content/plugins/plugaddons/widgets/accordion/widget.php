@@ -1,6 +1,6 @@
 <?php
 
-
+use \Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -12,8 +12,7 @@ use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 use Elementor\Scheme_Color;
 
-class Plugaddons_Accordion extends \Elementor\Widget_Base
-{
+class Plugaddons_Accordion extends Widget_Base{
 
     /**
      * Get widget name.
@@ -27,7 +26,7 @@ class Plugaddons_Accordion extends \Elementor\Widget_Base
      */
     public function get_name()
     {
-        return 'accordion_widget';
+        return 'accordion';
     }
 
     /**

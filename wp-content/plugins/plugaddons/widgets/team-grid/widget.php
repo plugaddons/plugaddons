@@ -1,6 +1,7 @@
 <?php
 
 
+use Elementor\Widget_Base;
 use Elementor\Control_Media;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border;
@@ -13,7 +14,7 @@ use Elementor\Repeater;
 use Elementor\Scheme_Typography;
 use Elementor\Utils;
 
-class Plugaddons_Team_Grid extends \Elementor\Widget_Base
+class Plugaddons_Team_Grid extends Widget_Base
 {
 
     /**
@@ -28,7 +29,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
      */
     public function get_name()
     {
-        return 'team_widget';
+        return 'team-grid';
     }
 
     /**
@@ -307,7 +308,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             'team_name',
             [
                 'label' => __('Name', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'separator' => 'before',
                 'default' => __('John Doe', 'plugaddons'),
@@ -317,7 +318,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             'team_designation',
             [
                 'label' => __('Designation', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXT,
+                'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => __('Programming', 'plugaddons'),
             ]
@@ -338,7 +339,7 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
             'team_content',
             [
                 'label' => __('Bio', 'plugaddons'),
-                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'type' => Controls_Manager::TEXTAREA,
                 'label_block' => true,
                 'condition' => ['enable_bio' => 'yes'],
                 'default' => __('Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt. ', 'plugaddons'),
@@ -1233,15 +1234,6 @@ class Plugaddons_Team_Grid extends \Elementor\Widget_Base
 
     }
 
-
-    /**
-     * Render Plugaddons widget output on the frontend.
-     *
-     * Written in JS and used to generate the final HTML.
-     *
-     * @since 1.0.0
-     * @access protected
-     */
 
 
 }

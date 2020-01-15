@@ -85,6 +85,7 @@ final class Elementor_Plugaddons_Extension {
 		add_action( 'init', [ $this, 'i18n' ] );
 		add_action( 'plugins_loaded', [ $this, 'init' ] );
 
+
 	}
 
 	/**
@@ -269,6 +270,9 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/accordion/widget.php');
 		require_once(__DIR__ . '/widgets/team-grid/widget.php');
 		require_once(__DIR__ . '/widgets/team-carousel/widget.php');
+		require_once(__DIR__ . '/widgets/card/widget.php');
+
+
 
 		// Register widget
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Progressbar() );
@@ -277,6 +281,8 @@ final class Elementor_Plugaddons_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Accordion() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_Grid() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_carousel() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Card() );
+
 
 
 	}

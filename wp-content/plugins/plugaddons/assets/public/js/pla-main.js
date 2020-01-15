@@ -15,7 +15,7 @@
         });
 
         // Accordion JS
-        elementorFrontend.hooks.addAction('frontend/element_ready/accordion_widget.default', function ($scope) {
+        elementorFrontend.hooks.addAction('frontend/element_ready/accordion.default', function ($scope) {
             $scope.find('.accordion').each(function () {
                 var $thisItem = $(this);
                 $thisItem.accordable({
@@ -25,7 +25,7 @@
 
         });
 
-        elementorFrontend.hooks.addAction('frontend/element_ready/progressbar_widget.default', function ($scope) {
+        elementorFrontend.hooks.addAction('frontend/element_ready/progressbar.default', function ($scope) {
             elementorFrontend.waypoint($scope, function () {
                 $scope.find('.pla-skill-level').each(function () {
                     var $current = $(this),

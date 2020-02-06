@@ -355,7 +355,7 @@ class Plugaddons_Card extends Widget_Base
         $this->add_control(
             'button_icon',
             [
-                'label' => __('Icon', 'text-domain'),
+                'label' => __('Icon', 'plugaddons'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'fa4compatibility' => 'icon',
@@ -954,7 +954,7 @@ class Plugaddons_Card extends Widget_Base
             <?php endif; ?>
             <div class="pla-card-desc">
                 <h5 <?php echo $this->get_render_attribute_string('card_name'); ?>>
-                    <?php echo esc_html($name); ?>
+                    <?php echo esc_html($name, 'plugaddons'); ?>
                 </h5>
                 <?php if ($settings['enable_bio'] == 'yes'): ?>
                     <p <?php echo $this->get_render_attribute_string('card_content'); ?>>

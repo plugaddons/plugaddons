@@ -202,7 +202,10 @@ final class Elementor_Plugaddons_Extension {
 
 	}
 
-	/**
+
+
+
+    /**
 	 * Admin notice
 	 *
 	 * Warning when the site doesn't have a minimum required Elementor version.
@@ -252,6 +255,9 @@ final class Elementor_Plugaddons_Extension {
 
 	}
 
+
+
+
 	/**
 	 * Init Widgets
 	 *
@@ -272,6 +278,7 @@ final class Elementor_Plugaddons_Extension {
 		require_once(__DIR__ . '/widgets/team-carousel/widget.php');
 		require_once(__DIR__ . '/widgets/card/widget.php');
 		require_once(__DIR__ . '/widgets/info-box/widget.php');
+		require_once(__DIR__ . '/widgets/pricing-table/widget.php');
 
 
 
@@ -284,6 +291,7 @@ final class Elementor_Plugaddons_Extension {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Team_carousel() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Card() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_InfoBox() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Plugaddons_Pricing() );
 
 
 

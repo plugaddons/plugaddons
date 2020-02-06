@@ -161,7 +161,7 @@ class Plugaddons_Accordion extends Widget_Base{
         $repeater->add_control(
             'tab_title_options',
             [
-                'label' => __('Title & Icons Options', 'plugin-name'),
+                'label' => __('Title & Icons Options', 'plugaddons'),
                 'type' => Controls_Manager::HEADING,
                 'condition' => ['customize' => 'yes'],
                 'style_transfer' => true,

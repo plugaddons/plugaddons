@@ -1828,7 +1828,7 @@ p.info-box-info {
 /* Pricing Table */
 .pla-pricing-box {
     background: #E9E9F8;
-    padding: 30px 11px;
+    padding: 30px 11px !important;
     text-align: center;
     border-radius: 10px;
 }
@@ -1844,7 +1844,7 @@ p.info-box-info {
     justify-content: center;
 }
 .pla-pricing-header--left .pla-pricing-box .pla-pricing-header,
-.pla-pricing-price--left .pla-pricing-box .pla-pricing-price{
+.pla-pricing-price--leftst .pla-pricing-box .pla-pricing-price{
     text-align: left;
 }
 .pla-pricing-header--center .pla-pricing-box .pla-pricing-header,

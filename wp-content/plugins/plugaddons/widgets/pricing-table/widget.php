@@ -142,7 +142,10 @@ class Plugaddons_Pricing extends Widget_Base
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'fa4compatibility' => 'icon',
-                'default' => 'fa fa-star',
+                'default' => [
+                    'value' => 'fas fa-star',
+                    'library' => 'solid',
+                ],
                 'condition' => ['header_icon_select' => 'icon', 'show_icon' => 'yes']
             ]
         );
@@ -186,7 +189,7 @@ class Plugaddons_Pricing extends Widget_Base
             [
                 'label' => __('Title', 'plugaddons'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Default title', 'plugaddons'),
+                'default' => __('Silver', 'plugaddons'),
                 'placeholder' => __('Type your title here', 'plugaddons'),
             ]
         );
@@ -409,6 +412,18 @@ class Plugaddons_Pricing extends Widget_Base
                 ]
             ]
         );
+        $repeater->add_control(
+            'show_icon',
+            [
+                'label' => __( 'Enable Icon', 'plugin-domain' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'your-plugin' ),
+                'label_off' => __( 'Hide', 'your-plugin' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
 
         $repeater->add_control(
             'icon',
@@ -421,7 +436,8 @@ class Plugaddons_Pricing extends Widget_Base
                 'include' => [
                     'fa fa-check',
                     'fa fa-close',
-                ]
+                ],
+                'condition'=>[ 'show_icon' => 'yes']
             ]
         );
         $this->add_control(
@@ -845,7 +861,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_control(
             'currency_hr',
             [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
+                'type' => Controls_Manager::DIVIDER,
             ]
         );
         $this->add_control(
@@ -875,7 +891,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_control(
             'period_hr',
             [
-                'type' => \Elementor\Controls_Manager::DIVIDER,
+                'type' => Controls_Manager::DIVIDER,
             ]
         );
         $this->add_control(
@@ -903,6 +919,58 @@ class Plugaddons_Pricing extends Widget_Base
             ]
         );
 
+        $this->end_controls_section();
+        $this->start_controls_section(
+            '_section_style_pricing_features',
+            [
+                'label' => __('Features', 'plugaddons'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'show_border',
+            [
+                'label' => __( 'Enable Border', 'plugin-domain' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'your-plugin' ),
+                'label_off' => __( 'Hide', 'your-plugin' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'features_border',
+                'selector' => '{{WRAPPER}} .pla-pricing-features ul.pla-pricing-features-list li',
+                'condition' => [
+                    'show_border' => 'yes'
+                ],
+            ]
+        );
+        $this->add_control(
+            'features_color',
+            [
+                'label' => __( 'Color', 'plugin-domain' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-pricing-features ul.pla-pricing-features-list li' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'features_typography',
+                'label' => __( 'Typography', 'plugin-domain' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .pla-pricing-features ul.pla-pricing-features-list li',
+            ]
+        );
         $this->end_controls_section();
 
 
@@ -967,7 +1035,7 @@ class Plugaddons_Pricing extends Widget_Base
             <div class="pla-pricing-header">
                 <?php if ($settings['show_icon']):?>
                     <?php if ($settings['header_icon_select'] == 'icon'):?>
-                        <i class="<?php echo esc_attr($settings['header_icon']['value'], 'plugaddons');?>"></i>
+                        <?php Icons_Manager::render_icon( $settings['header_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                     <?php endif;?>
                     <?php if ($settings['header_icon_select'] == 'image'):?>
                         <?php if ($settings['header_image']['url'] || $settings['header_image']['id']) :
@@ -994,7 +1062,7 @@ class Plugaddons_Pricing extends Widget_Base
                 <?php if ($features):?>
                 <ul <?php echo $this->get_render_attribute_string('features_list'); ?>>
                     <?php foreach ($features as $feature):?>
-                    <li><?php echo esc_html($feature['text'], 'plugaddons')?></li>
+                    <li class="elementor-repeater-item-<?php echo $feature['_id']; ?>"><?php echo esc_html($feature['text'], 'plugaddons')?></li>
                     <?php endforeach;?>
                 </ul>
                 <?php endif;?>

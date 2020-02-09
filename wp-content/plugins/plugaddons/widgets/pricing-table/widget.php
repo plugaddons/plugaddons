@@ -143,7 +143,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'label_block' => true,
                 'fa4compatibility' => 'icon',
                 'default' => [
-                    'value' => 'fas fa-star',
+                    'value' => 'fa fa-smile-o',
                     'library' => 'solid',
                 ],
                 'condition' => ['header_icon_select' => 'icon', 'show_icon' => 'yes']
@@ -1000,10 +1000,7 @@ class Plugaddons_Pricing extends Widget_Base
             'class' => "pla-head-title"
         ]);
         $features = isset($settings['features_list']) ? $settings['features_list'] : array();
-        $this->add_inline_editing_attributes('features_list', 'none');
-        $this->add_render_attribute('features_list', [
-            'class' => "pla-pricing-features-list"
-        ]);
+
         $price = isset($settings['price']) ? $settings['price'] : array();
         $this->add_inline_editing_attributes('price', 'none');
         $this->add_render_attribute('price', [
@@ -1060,9 +1057,17 @@ class Plugaddons_Pricing extends Widget_Base
             <?php endif;?>
             <div class="pla-pricing-features">
                 <?php if ($features):?>
-                <ul <?php echo $this->get_render_attribute_string('features_list'); ?>>
-                    <?php foreach ($features as $feature):?>
-                    <li class="elementor-repeater-item-<?php echo $feature['_id']; ?>"><?php echo esc_html($feature['text'], 'plugaddons')?></li>
+                <ul class="pla-pricing-features-list <?php echo esc_attr($settings['show_border'] ? 'bordered' : '');?>">
+                    <?php foreach ($features as $index => $feature):
+
+                        $text_key = $this->get_repeater_setting_key( 'text', 'features_list', $index );
+                        $this->add_inline_editing_attributes( $text_key, 'intermediate' );
+                        $this->add_render_attribute( $text_key, 'class', 'ha-pricing-table-feature-text' );
+                        ?>
+                    <li class="elementor-repeater-item-<?php echo esc_attr($feature['_id']) ?>">
+                        <span <?php $this->print_render_attribute_string( $text_key ); ?>><?php echo esc_html($feature['text'], 'plugaddons')?></span>
+
+                    </li>
                     <?php endforeach;?>
                 </ul>
                 <?php endif;?>

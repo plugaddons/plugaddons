@@ -185,12 +185,24 @@ class Plugaddons_Pricing extends Widget_Base
             ]
         );
         $this->add_control(
+            'show__title',
+            [
+                'label' => __( 'Show Title', 'plugaddons' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'plugaddons' ),
+                'label_off' => __( 'Hide', 'plugaddons' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+        $this->add_control(
             'header_title',
             [
                 'label' => __('Title', 'plugaddons'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Silver', 'plugaddons'),
                 'placeholder' => __('Type your title here', 'plugaddons'),
+                'condition' => ['show__title' => 'yes']
             ]
         );
         $this->end_controls_section();
@@ -211,6 +223,32 @@ class Plugaddons_Pricing extends Widget_Base
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'style_transfer' => true,
+            ]
+        );
+        $this->add_control(
+            'allows_show_badge',
+            [
+                'label' => __('Allows Show', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'plugaddons'),
+                'label_off' => __('Hide', 'plugaddons'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+                'style_transfer' => true,
+                'condition'=> ['show_badge' => 'yes']
+            ]
+        );
+        $this->add_control(
+            'show_badge__on_hover',
+            [
+                'label' => __('Show On Hover', 'plugaddons'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __('Show', 'plugaddons'),
+                'label_off' => __('Hide', 'plugaddons'),
+                'return_value' => 'yes',
+                'default' => 'hide',
+                'style_transfer' => true,
+                'condition'=> ['show_badge' => 'yes']
             ]
         );
 
@@ -296,7 +334,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_control(
             'show_price',
             [
-                'label' => __( 'Show Price', 'plugin-domain' ),
+                'label' => __( 'Show Price', 'plugaddons' ),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __( 'Show', 'plugaddons' ),
                 'label_off' => __( 'Hide', 'plugaddons' ),
@@ -336,9 +374,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'dynamic' => [
                     'active' => true
                 ],
-                'condition' => [
-                    'show_price' => 'yes'
-                ],
+                'condition' => [ 'show_price' => 'yes'],
             ]
         );
         $this->add_control(
@@ -388,6 +424,17 @@ class Plugaddons_Pricing extends Widget_Base
             ]
         );
         $this->add_control(
+            'show_fetures__title',
+            [
+                'label' => __( 'Show Title', 'plugaddons' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'your-plugin' ),
+                'label_off' => __( 'Hide', 'your-plugin' ),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+        $this->add_control(
             'features_text',
             [
                 'label' => __('Title', 'plugaddons'),
@@ -396,7 +443,35 @@ class Plugaddons_Pricing extends Widget_Base
                 'placeholder' => __('Type Features text', 'plugaddons'),
                 'dynamic' => [
                     'active' => true
-                ]
+                ],
+                'condition' => ['show_fetures__title' => 'yes']
+            ]
+        );
+        $this->add_control(
+            'text_position',
+            [
+                'label' => __('Position', 'plugaddons'),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => false,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'plugaddons'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Top', 'plugaddons'),
+                        'icon' => 'eicon-h-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'plugaddons'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'toggle' => false,
+                'default' => 'center',
+                'prefix_class' => 'pla-pricing-align--',
+                'style_transfer' => true,
+
             ]
         );
         $repeater = new Repeater();
@@ -415,7 +490,7 @@ class Plugaddons_Pricing extends Widget_Base
         $repeater->add_control(
             'show_icon',
             [
-                'label' => __( 'Enable Icon', 'plugin-domain' ),
+                'label' => __( 'Enable Icon', 'plugaddons' ),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __( 'Show', 'your-plugin' ),
                 'label_off' => __( 'Hide', 'your-plugin' ),
@@ -500,6 +575,43 @@ class Plugaddons_Pricing extends Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'button__toggle',
+            [
+                'label' => __('Offset', 'plugaddons'),
+                'type' => Controls_Manager::POPOVER_TOGGLE,
+                'label_off' => __('None', 'plugaddons'),
+                'label_on' => __('Custom', 'plugaddons'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->start_popover();
+        $this->add_responsive_control(
+            'button__offset_x',
+            [
+                'label' => __('Offset X', 'plugaddons'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'condition' => [
+                    'button__toggle' => 'yes'
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                ],
+                'render_type' => 'ui',
+                'selectors' => [
+                    '(desktop){{WRAPPER}} .pla-price-btn' => '-ms-transform: translate({{button__offset_x.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{button__offset_x.SIZE || 0}}{{UNIT}}); transform: translate({{button__offset_x.SIZE || 0}}{{UNIT}});',
+                    '(tablet){{WRAPPER}} .pla-price-btn' => '-ms-transform: translate({{button__offset_x_tablet.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{button__offset_x_tablet.SIZE || 0}}{{UNIT}}); transform: translate({{button__offset_x_tablet.SIZE || 0}}{{UNIT}});',
+                    '(mobile){{WRAPPER}} .pla-price-btn' => '-ms-transform: translate({{button__offset_x_mobile.SIZE || 0}}{{UNIT}}); -webkit-transform: translate({{button__offset_x_mobile.SIZE || 0}}{{UNIT}}); transform: translate({{button__offset_x_mobile.SIZE || 0}}{{UNIT}});',
+                ],
+            ]
+        );
+
+        $this->end_popover();
         $this->end_controls_section();
 
 
@@ -532,10 +644,10 @@ class Plugaddons_Pricing extends Widget_Base
                     '{{WRAPPER}} .pla-pricing-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'default' =>[
-                    'top' => 0,
-                    'right' => 0,
-                    'bottom' => 0,
-                    'left' => 0,
+                    'top' => 30,
+                    'right' => 11,
+                    'bottom' => 30,
+                    'left' => 11,
                     'isLinked' => true,
                 ]
             ]
@@ -551,7 +663,7 @@ class Plugaddons_Pricing extends Widget_Base
                 ]
             ]
         );
-        $this->start_controls_tabs('_tab_card_s');
+        $this->start_controls_tabs('_tab_pricing__s');
         $this->start_controls_tab(
             '_tab_pricing_normal',
             [
@@ -562,7 +674,7 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'background',
-                'label' => __('Background', 'plugin-domain'),
+                'label' => __('Background', 'plugaddons'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .pla-pricing-box',
             ]
@@ -570,7 +682,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'card_border',
+                'name' => 'pricing__border',
                 'selector' => '{{WRAPPER}} .pla-pricing-box',
             ]
         );
@@ -584,7 +696,7 @@ class Plugaddons_Pricing extends Widget_Base
         );
         $this->end_controls_tab();
         $this->start_controls_tab(
-            '_tab_card_hover',
+            '_tab_pricing__hover',
             [
                 'label' => __('Hover', 'plugaddons'),
             ]
@@ -601,7 +713,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'card_border_hover',
+                'name' => 'pricing__border_hover',
                 'selector' => '{{WRAPPER}} .pla-pricing-box:hover',
             ]
         );
@@ -621,6 +733,7 @@ class Plugaddons_Pricing extends Widget_Base
             [
                 'label' => __('Badge', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_control(
@@ -647,6 +760,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-badge' => 'width: {{SIZE}}{{UNIT}};',
                 ],
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_control(
@@ -673,6 +787,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-badge' => 'height: {{SIZE}}{{UNIT}};',
                 ],
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_control(
@@ -684,6 +799,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-badge' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_control(
@@ -698,6 +814,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-badge' => 'background-color: {{VALUE}}',
                 ],
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_control(
@@ -712,6 +829,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-badge' => 'color: {{VALUE}}',
                 ],
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->add_group_control(
@@ -721,6 +839,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'label' => __( 'Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .pla-pricing-badge',
+                'condition' => ['show_badge' => 'yes']
             ]
         );
         $this->end_controls_section();
@@ -763,18 +882,18 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_control(
             'margin',
             [
-                'label' => __( 'Margin', 'plugin-domain' ),
+                'label' => __( 'Margin', 'plugaddons' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .pla-head-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .pla-pricing-header' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
         $this->add_control(
             'header_color',
             [
-                'label' => __( 'Title Color', 'plugin-domain' ),
+                'label' => __( 'Title Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -783,6 +902,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-head-title' => 'color: {{VALUE}}',
                 ],
+                'condition' => ['show__title' => 'yes']
             ]
         );
 
@@ -790,9 +910,10 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'header_typography',
-                'label' => __( 'Typography', 'plugin-domain' ),
+                'label' => __( 'Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .pla-head-title',
+                'condition' => ['show__title' => 'yes']
             ]
         );
 
@@ -802,6 +923,7 @@ class Plugaddons_Pricing extends Widget_Base
             [
                 'label' => __('Pricing', 'plugaddons'),
                 'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
         $this->add_control(
@@ -829,15 +951,17 @@ class Plugaddons_Pricing extends Widget_Base
                 'prefix_class' => 'pla-pricing-price--',
                 'style_transfer' => true,
                 'condition' => [
-                    'image_customize' => 'yes'
+                    'image_customize' => 'yes',
+                    'show_price' => 'yes'
                 ],
+
             ]
         );
 
         $this->add_control(
             'price_color',
             [
-                'label' => __( 'Price Color', 'plugin-domain' ),
+                'label' => __( 'Price Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -846,6 +970,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-price' => 'color: {{VALUE}}',
                 ],
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
 
@@ -853,21 +978,23 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'price_typography',
-                'label' => __( 'Price Typography', 'plugin-domain' ),
+                'label' => __( 'Price Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .pla-pricing-price',
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
         $this->add_control(
             'currency_hr',
             [
                 'type' => Controls_Manager::DIVIDER,
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
         $this->add_control(
             'currency_color',
             [
-                'label' => __( 'Currency Color', 'plugin-domain' ),
+                'label' => __( 'Currency Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -876,6 +1003,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .currency' => 'color: {{VALUE}}',
                 ],
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
 
@@ -883,21 +1011,23 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'crrency_typography',
-                'label' => __( 'Currency Typography', 'plugin-domain' ),
+                'label' => __( 'Currency Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .currency',
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
         $this->add_control(
             'period_hr',
             [
                 'type' => Controls_Manager::DIVIDER,
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
         $this->add_control(
             'period_color',
             [
-                'label' => __( 'Period Color', 'plugin-domain' ),
+                'label' => __( 'Period Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -906,6 +1036,7 @@ class Plugaddons_Pricing extends Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .pla-pricing-period' => 'color: {{VALUE}}',
                 ],
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
 
@@ -913,9 +1044,10 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'period_typography',
-                'label' => __( 'Currency Typography', 'plugin-domain' ),
+                'label' => __( 'Currency Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .pla-pricing-period',
+                'condition' => [ 'show_price' => 'yes']
             ]
         );
 
@@ -928,9 +1060,34 @@ class Plugaddons_Pricing extends Widget_Base
             ]
         );
         $this->add_control(
+            'fetures__title_color',
+            [
+                'label' => __( 'Title Color', 'plugaddons' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-pricing-features .pla-pricing-fetures-title' => 'color: {{VALUE}}',
+                ],
+                'condition' => ['show_fetures__title' => 'yes']
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'features__title_typography',
+                'label' => __( 'Title Typography', 'plugaddons' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .pla-pricing-features .pla-pricing-fetures-title',
+                'condition' => ['show_fetures__title' => 'yes']
+            ]
+        );
+        $this->add_control(
             'show_border',
             [
-                'label' => __( 'Enable Border', 'plugin-domain' ),
+                'label' => __( 'Enable Border', 'plugaddons' ),
                 'type' => Controls_Manager::SWITCHER,
                 'label_on' => __( 'Show', 'your-plugin' ),
                 'label_off' => __( 'Hide', 'your-plugin' ),
@@ -951,7 +1108,7 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_control(
             'features_color',
             [
-                'label' => __( 'Color', 'plugin-domain' ),
+                'label' => __( 'Color', 'plugaddons' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
                     'type' => Scheme_Color::get_type(),
@@ -966,9 +1123,154 @@ class Plugaddons_Pricing extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'features_typography',
-                'label' => __( 'Typography', 'plugin-domain' ),
+                'label' => __( 'Typography', 'plugaddons' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .pla-pricing-features ul.pla-pricing-features-list li',
+            ]
+        );
+        $this->end_controls_section();
+        $this->start_controls_section(
+            '_section_style_pricing_button',
+            [
+                'label' => __('Footer', 'plugaddons'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_control(
+            'pricing_button_padding',
+            [
+                'label' => __('Padding', 'plugaddons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-pricing-footer a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'default' =>[
+                    'top' => 4,
+                    'right' => 26,
+                    'bottom' => 4,
+                    'left' => 26,
+                    'isLinked' => true,
+                ]
+            ]
+        );
+        $this->add_control(
+            'pricing_style_button_border_radius',
+            [
+                'label' => __('Border Radius', 'plugaddons'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-pricing-footer a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'default' =>[
+                    'top' => 15,
+                    'right' => 15,
+                    'bottom' => 15,
+                    'left' => 15,
+                    'isLinked' => true,
+                ]
+            ]
+        );
+        $this->start_controls_tabs('_tab_pricing_button_s');
+        $this->start_controls_tab(
+            '_tab_pricing_button_normal',
+            [
+                'label' => __('Normal', 'plugaddons'),
+            ]
+        );
+        $this->add_control(
+            'pricing__button_color',
+            [
+                'label' => __( 'Color', 'plugaddons' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-price-btn' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'pricing__button_background',
+                'label' => __('Background', 'plugaddons'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .pla-price-btn',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'pricing_s__button_border',
+                'selector' => '{{WRAPPER}} .pla-price-btn',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'pricing__button_shadow',
+                'label' => __('Box Shadow', 'plugaddons'),
+                'selector' => '{{WRAPPER}} .pla-price-btn',
+            ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            '_tab_pricing__button_hover',
+            [
+                'label' => __('Hover', 'plugaddons'),
+            ]
+        );
+        $this->add_control(
+            'pricing__button_color_hover',
+            [
+                'label' => __( 'Color', 'plugaddons' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Scheme_Color::get_type(),
+                    'value' => Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .pla-price-btn:hover' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'pricing__hover_background',
+                'label' => __('Background', 'plugaddons'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .pla-price-btn:hover',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'pricing__button_border_hover',
+                'selector' => '{{WRAPPER}} .pla-price-btn:hover',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'pricing__button_shadow_hover',
+                'label' => __('Box Shadow', 'plugaddons'),
+                'selector' => '{{WRAPPER}} .pla-price-btn:hover',
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'pricing__button_typography',
+                'label' => __( 'Typography', 'plugaddons' ),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .pla-price-btn',
             ]
         );
         $this->end_controls_section();
@@ -1011,6 +1313,11 @@ class Plugaddons_Pricing extends Widget_Base
         $this->add_render_attribute('period', [
             'class' => "pla-pricing-period"
         ]);
+        $fetures_title = isset($settings['features_text']) ? $settings['features_text'] : '';
+        $this->add_inline_editing_attributes('features_text', 'none');
+        $this->add_render_attribute('features_text', [
+            'class' => "pla-pricing-fetures-title"
+        ]);
 
         $this->add_inline_editing_attributes( 'button_text', 'none' );
         $this->add_render_attribute( 'button_text', 'class', 'pla-price-btn' );
@@ -1026,8 +1333,10 @@ class Plugaddons_Pricing extends Widget_Base
         ?>
 
         <div class="pla-pricing-box">
-            <?php if ($settings['show_badge'] == 'yes'):?>
-                <span class="pla-pricing-badge"><?php echo esc_html($badgetext, 'plugaddons')?></span>
+            <?php if ($settings['show_badge'] == 'yes' && $settings['allows_show_badge']=='yes'):?>
+                <span class="pla-pricing-badge <?php echo $settings['allows_show_badge'] ? 'badge-show--allows' : '';?>"><?php echo esc_html($badgetext, 'plugaddons')?></span>
+            <?php elseif ($settings['show_badge'] == 'yes' && $settings['show_badge__on_hover']):?>
+                <span class="pla-pricing-badge <?php echo $settings['show_badge__on_hover'] ? 'badge-show--hover' : '';?>"><?php echo esc_html($badgetext, 'plugaddons')?></span>
             <?php endif;?>
             <div class="pla-pricing-header">
                 <?php if ($settings['show_icon']):?>
@@ -1047,7 +1356,9 @@ class Plugaddons_Pricing extends Widget_Base
                     <?php endif;?>
 
                 <?php endif;?>
-                <h3 <?php echo $this->get_render_attribute_string('header_title'); ?>><?php echo esc_html($htitle, 'plugaddons')?></h3>
+                <?php if ($settings['show__title'] == 'yes'):?>
+                    <h3 <?php echo $this->get_render_attribute_string('header_title'); ?>><?php echo esc_html($htitle, 'plugaddons')?></h3>
+                <?php endif;?>
             </div>
             <?php if ($settings['show_price'] == 'yes'):?>
             <div class="pla-pricing-price">
@@ -1056,6 +1367,9 @@ class Plugaddons_Pricing extends Widget_Base
             </div>
             <?php endif;?>
             <div class="pla-pricing-features">
+                <?php if ($settings['show_fetures__title'] == 'yes'):?>
+                <h5 <?php echo $this->get_render_attribute_string('features_text'); ?>><?php echo esc_html($fetures_title);?></h5>
+                <?php endif;?>
                 <?php if ($features):?>
                 <ul class="pla-pricing-features-list <?php echo esc_attr($settings['show_border'] ? 'bordered' : '');?>">
                     <?php foreach ($features as $index => $feature):
@@ -1065,6 +1379,9 @@ class Plugaddons_Pricing extends Widget_Base
                         $this->add_render_attribute( $text_key, 'class', 'ha-pricing-table-feature-text' );
                         ?>
                     <li class="elementor-repeater-item-<?php echo esc_attr($feature['_id']) ?>">
+                        <?php if ($feature['show_icon'] == 'yes'):?>
+                        <i class="<?php echo esc_attr($feature['icon']);?>"></i>
+                        <?php endif;?>
                         <span <?php $this->print_render_attribute_string( $text_key ); ?>><?php echo esc_html($feature['text'], 'plugaddons')?></span>
 
                     </li>

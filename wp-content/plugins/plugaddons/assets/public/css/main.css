@@ -1828,10 +1828,11 @@ p.info-box-info {
 /* Pricing Table */
 .pla-pricing-box {
     background: #E9E9F8;
-    padding: 30px 11px !important;
+    padding: 30px 11px;
     text-align: center;
     border-radius: 10px;
     overflow: hidden;
+    transition: all .3s ease-in-out;
 }
 .pla-pricing-badge {
     position: absolute;
@@ -1855,6 +1856,15 @@ p.info-box-info {
 .pla-pricing-header--right .pla-pricing-box .pla-pricing-header,
 .pla-pricing-price--right .pla-pricing-box .pla-pricing-price {
 
+    text-align: right;
+}
+.pla-pricing-align--left .pla-pricing-box {
+    text-align: left;
+}
+.pla-pricing-align--center .pla-pricing-box {
+    text-align: center;
+}
+.pla-pricing-align--right .pla-pricing-box {
     text-align: right;
 }
 .pla-pricing-header i {
@@ -1924,4 +1934,13 @@ p.info-box-info {
     color: #2F4260;
 }
 
+.pla-pricing-badge.badge-show--hover {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
 
+.pla-pricing-box:hover .pla-pricing-badge.badge-show--hover {
+    visibility: visible;
+    opacity: 1;
+}

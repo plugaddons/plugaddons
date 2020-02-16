@@ -725,6 +725,14 @@ class Plugaddons_Pricing extends Widget_Base
                 'selector' => '{{WRAPPER}} .pla-pricing-box:hover',
             ]
         );
+        $this->add_control(
+            'pricing__hover_animation',
+            [
+                'label' => __( 'Hover Animation', 'plugaddons' ),
+                'type' => Controls_Manager::HOVER_ANIMATION,
+                'prefix_class' => 'pla-pricing-box-',
+            ]
+        );
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->end_controls_section();
@@ -1332,7 +1340,7 @@ class Plugaddons_Pricing extends Widget_Base
 
         ?>
 
-        <div class="pla-pricing-box">
+        <div class="pla-pricing-box <?php echo esc_attr($settings['pricing__hover_animation']);?>">
             <?php if ($settings['show_badge'] == 'yes' && $settings['allows_show_badge']=='yes'):?>
                 <span class="pla-pricing-badge <?php echo $settings['allows_show_badge'] ? 'badge-show--allows' : '';?>"><?php echo esc_html($badgetext, 'plugaddons')?></span>
             <?php elseif ($settings['show_badge'] == 'yes' && $settings['show_badge__on_hover']):?>
